@@ -1,0 +1,8 @@
+{
+  "name": "ngtechno-rep",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:raugusto96/ngtechno.git",
+  "author": "Rodrigo Augusto <rodrigoaugusto96@outlook.com>",
+  "license": "MIT"
+}
