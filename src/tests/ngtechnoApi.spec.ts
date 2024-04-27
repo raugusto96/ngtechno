@@ -1,14 +1,21 @@
 import axios from "axios";
-import NgtechnoApi from "../utils/api/ngtechnoApi";
+import NgtechnoApi, { RequestApi, ResponseRPC } from "../utils/api/ngtechnoApi";
 
 const makeSut = (): NgtechnoApi => {
   return new NgtechnoApi();
 };
 
-const makeFakeParams = () => ({
+const makeFakeParams = (): RequestApi => ({
   url: "/any-url-test",
   method: "POST",
   body: { test: "any-body-test" },
+});
+
+const makeFakeResponse = (): ResponseRPC => ({
+  sucesso: true,
+  mensagem: "Any success message",
+  retorno: { body: "any-body" },
+  exceptionType: null,
 });
 
 describe("NgTechNo Api Service", () => {
@@ -22,5 +29,15 @@ describe("NgTechNo Api Service", () => {
       method: fakeRequestParams.method,
       params: fakeRequestParams.body,
     });
+  });
+
+  test("should return an RPC response on success", async () => {
+    const sut = makeSut();
+    jest.spyOn(axios, "request").mockResolvedValue({
+      data: makeFakeResponse(),
+    });
+    const fakeRequestParams = makeFakeParams();
+    const httpResponse = await sut.request(fakeRequestParams);
+    expect(httpResponse).toEqual(makeFakeResponse());
   });
 });
