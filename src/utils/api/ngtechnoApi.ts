@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 
 interface ResponseRPC {
   sucesso: boolean;
@@ -23,20 +23,20 @@ export default class NgtechnoApi implements ApiFetcher {
   public async request(params: RequestApi): Promise<ResponseRPC> {
     console.log(`${this.url}${params.url}`);
     console.log({ params: params.body });
-    // const { data } = await axios.request({
-    //   url: `${this.url}${params.url}`,
-    //   method: params.method,
-    //   params: params.body,
-    // });
+    const { data } = await axios.request({
+      url: `${this.url}${params.url}`,
+      method: params.method,
+      params: params.body,
+    });
     const responseRPC: ResponseRPC = {
-      sucesso: false,
-      mensagem: "",
-      retorno: null,
-      exceptionType: "",
-      // sucesso: data.sucesso,
-      // mensagem: data.mensagem,
-      // retorno: data.retorno,
-      // exceptionType: data.exceptionType,
+      // sucesso: false,
+      // mensagem: "",
+      // retorno: null,
+      // exceptionType: "",
+      sucesso: data.sucesso,
+      mensagem: data.mensagem,
+      retorno: data.retorno,
+      exceptionType: data.exceptionType,
     };
     return responseRPC;
   }
