@@ -1,7 +1,11 @@
 import { ButtonProps } from "./protocol";
 
-const Button: React.FC<ButtonProps> = ({ text }) => {
-  return <button type='button'>{text}</button>;
+const Button: React.FC<ButtonProps> = ({ text, handleClick }) => {
+  return (
+    <button type='button' onClick={handleClick}>
+      {text}
+    </button>
+  );
 };
 
 export default Button;

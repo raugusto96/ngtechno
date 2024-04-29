@@ -11,19 +11,14 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   // const ngtechnoApi = new NgtechnoApi();
 
   // Requisita o corredor
-  const getRunner = async ({
-    idCorrida,
-    numeroCorredor,
-  }: {
-    idCorrida: number;
-    numeroCorredor: number;
-  }) => {
+  const getRunner = async (numeroCorredor: number) => {
     setIsLoading((prevState) => !prevState);
-    console.log({ idCorrida, numeroCorredor });
+    console.log(numeroCorredor);
     // const response = await ngtechnoApi.request({
     //   url: "/obterTempoCorredor",
     //   body: {
@@ -33,6 +28,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // });
     // console.log(response);
     setRunner(mockRunner);
+    setIsOpenModal(true);
     setIsLoading((prevState) => !prevState);
   };
 
@@ -52,14 +48,16 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    getRunner({ idCorrida: 1, numeroCorredor: 1 });
     getRunnersList(1);
   }, []);
 
   const initialValue = {
+    getRunner,
     runner,
     runnersList,
     isLoading,
+    isOpenModal,
+    setIsOpenModal,
   };
 
   return (

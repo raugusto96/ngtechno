@@ -3,28 +3,18 @@ import IndividualClassificationCard from "components/Cards/IndividualClassificat
 import IndividualTimeCard from "components/Cards/IndividualTimeCard/IndividualTimeCard";
 import SocialMediaIcon from "components/Icons/SocialMediaIcon/SocialMediaIcon";
 import { runnerTransition } from "config/transition";
-import { IRunner } from "context/provider/protocols";
-import { RunnersContext } from "context/runnerContext";
-import { useContext, useEffect, useState } from "react";
+import { ClassificationModalProps } from "./protocol";
 
-const Classification: React.FC = () => {
-  const [runner, setRunner] = useState<IRunner>({} as IRunner);
-
-  const context = useContext(RunnersContext);
-
-  useEffect(() => {
-    if (context) {
-      setRunner(context.runner);
-    }
-  }, [context]);
-
+const ClassificationModal: React.FC<ClassificationModalProps> = ({
+  runner,
+  handleClose,
+}) => {
   return (
     <>
       <section>
         <h3>{runner.name}</h3>
         <h4>
-          {context && runnerTransition.sex[runner.sex.toLowerCase()]} |{" "}
-          {runner.id}
+          {runnerTransition.sex[runner?.sex.toLowerCase()]} | {runner.id}
         </h4>
       </section>
       <section>
@@ -69,7 +59,7 @@ const Classification: React.FC = () => {
       </section>
       <section>
         <Button text='Baixar certificado' />
-        <Button text='Voltar' />
+        <Button text='Fechar' handleClick={() => handleClose(false)} />
       </section>
       <section>
         <SocialMediaIcon icon='Whatsapp' handleClick={() => []} />
@@ -79,4 +69,4 @@ const Classification: React.FC = () => {
   );
 };
 
-export default Classification;
+export default ClassificationModal;
