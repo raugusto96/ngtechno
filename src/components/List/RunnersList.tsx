@@ -1,19 +1,17 @@
 import { IRunner } from "context/provider/protocols";
-import { RunnersContext } from "context/runnerContext";
-import { useContext, useEffect, useState } from "react";
+import useRunnersContext from "context/runnerContext";
+import { useEffect, useState } from "react";
 import TableHeader from "./Header/TableHeader";
 import TableData from "./Data/TableData";
 
 const RunnersList: React.FC = () => {
   const [runners, setRunners] = useState<IRunner[]>([]);
 
-  const context = useContext(RunnersContext);
+  const { filteredRunnersList } = useRunnersContext();
 
   useEffect(() => {
-    if (context) {
-      setRunners(context.runnersList);
-    }
-  }, [context]);
+    setRunners(filteredRunnersList);
+  }, [filteredRunnersList]);
 
   return (
     <table>

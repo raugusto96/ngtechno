@@ -40,7 +40,7 @@ export const mockRunnerList: IRunner[] = [
   },
   {
     id: 2,
-    name: "Maria Malachias",
+    name: "Marta Malachias",
     sex: "F",
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",

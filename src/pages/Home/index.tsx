@@ -2,26 +2,38 @@ import Button from "components/Button";
 import Footer from "components/Footer";
 import InputText from "components/Inputs/InputText";
 import ClassificationModal from "components/Modals/ClassificationModal/ClassificationModal";
-import { RunnersContext } from "context/runnerContext";
-import { useContext } from "react";
+import useRunnersContext from "context/runnerContext";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
-  const context = useContext(RunnersContext);
+  const { getRunner, isOpenModal, setIsOpenModal, runner } =
+    useRunnersContext();
   const navigate = useNavigate();
+
+  const [runnerNumber, setRunnerNumber] = useState<string>("");
+
+  const handleRunnerNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    setRunnerNumber(value);
+  };
 
   return (
     <div>
       <h2>Preencha as informações abaixo para continuar</h2>
+      <form></form>
       <InputText
         id='chest-number-input'
         name='idCorrida'
         placeholder='Digite seu número de peito'
+        value={runnerNumber}
+        handleChange={handleRunnerNumber}
       />
       <Button
         text='Buscar resultados'
         handleClick={() => {
-          context?.getRunner(699);
+          getRunner(Number(runnerNumber));
+          setRunnerNumber("");
         }}
       />
       -ou-
@@ -30,11 +42,8 @@ const Home: React.FC = () => {
         handleClick={() => navigate("/classificacoes")}
       />
       <Footer />
-      {context?.isOpenModal && (
-        <ClassificationModal
-          runner={context?.runner}
-          handleClose={context?.setIsOpenModal}
-        />
+      {isOpenModal && (
+        <ClassificationModal runner={runner} handleClose={setIsOpenModal} />
       )}
     </div>
   );

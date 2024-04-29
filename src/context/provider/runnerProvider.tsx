@@ -1,15 +1,19 @@
 import { RunnersContext } from "context/runnerContext";
 import { useEffect, useState } from "react";
 // import NgtechnoApi from "utils/api/ngtechnoApi";
-import { IRunner } from "./protocols";
+import { IFilter, IRunner } from "./protocols";
 import { mockRunner, mockRunnerList } from "./mockData";
 
 const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // States
+  const [filter, setFilter] = useState<IFilter>({
+    name: "",
+  });
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
+  const [filteredRunnersList, setFilteredRunnersList] = useState<IRunner[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
@@ -44,17 +48,36 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // });
     // console.log(response);
     setRunnersList(mockRunnerList);
+    setFilteredRunnersList(mockRunnerList);
     setIsLoading((prevState) => !prevState);
+  };
+
+  const filterRunnerList = (name: string) => {
+    if (name.trim() === "") {
+      setFilteredRunnersList(runnersList);
+    } else {
+      const filteredRunnerList = runnersList.filter((runner) =>
+        runner.name.toLowerCase().includes(name.toLowerCase())
+      );
+      setFilteredRunnersList(filteredRunnerList);
+    }
   };
 
   useEffect(() => {
     getRunnersList(1);
   }, []);
 
+  useEffect(() => {
+    filterRunnerList(filter.name);
+  }, [filter]);
+
   const initialValue = {
+    filter,
+    setFilter,
     getRunner,
     runner,
     runnersList,
+    filteredRunnersList,
     isLoading,
     isOpenModal,
     setIsOpenModal,

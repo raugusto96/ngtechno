@@ -10,3 +10,7 @@ export interface IRunner {
   generalClassification: number;
   teamClassification: number;
 }
+
+export interface IFilter {
+  name: string;
+}
