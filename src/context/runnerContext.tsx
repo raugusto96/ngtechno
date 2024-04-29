@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { IFilter, IRunner } from "./provider/protocols";
 
 type RunnerContextType = {
@@ -16,7 +16,3 @@ type RunnerContextType = {
 export const RunnersContext = createContext<RunnerContextType>(
   {} as RunnerContextType
 );
-
-const useRunnersContext = () => useContext(RunnersContext);
-
-export default useRunnersContext;

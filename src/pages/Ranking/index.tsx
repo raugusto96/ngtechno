@@ -2,7 +2,7 @@ import Button from "components/Button";
 import InputText from "components/Inputs/InputText";
 import RunnersList from "components/List/RunnersList";
 import { IFilter } from "context/provider/protocols";
-import useRunnersContext from "context/runnerContext";
+import useRunnersContext from "hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
 
 const Ranking: React.FC = () => {

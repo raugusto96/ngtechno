@@ -1,8 +1,8 @@
 import { IRunner } from "context/provider/protocols";
-import useRunnersContext from "context/runnerContext";
 import { useEffect, useState } from "react";
 import TableHeader from "./Header/TableHeader";
 import TableData from "./Data/TableData";
+import useRunnersContext from "hooks/useRunnersContext";
 
 const RunnersList: React.FC = () => {
   const [runners, setRunners] = useState<IRunner[]>([]);

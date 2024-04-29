@@ -1,5 +1,5 @@
 import { RunnersContext } from "context/runnerContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import NgtechnoApi from "utils/api/ngtechnoApi";
 import { IFilter, IRunner } from "./protocols";
 import { mockRunner, mockRunnerList } from "./mockData";
@@ -52,16 +52,19 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading((prevState) => !prevState);
   };
 
-  const filterRunnerList = (name: string) => {
-    if (name.trim() === "") {
-      setFilteredRunnersList(runnersList);
-    } else {
-      const filteredRunnerList = runnersList.filter((runner) =>
-        runner.name.toLowerCase().includes(name.toLowerCase())
-      );
-      setFilteredRunnersList(filteredRunnerList);
-    }
-  };
+  const filterRunnerList = useCallback(
+    (name: string) => {
+      if (name.trim() === "") {
+        setFilteredRunnersList(runnersList);
+      } else {
+        const filteredRunnerList = runnersList.filter((runner) =>
+          runner.name.toLowerCase().includes(name.toLowerCase())
+        );
+        setFilteredRunnersList(filteredRunnerList);
+      }
+    },
+    [runnersList]
+  );
 
   useEffect(() => {
     getRunnersList(1);
@@ -69,7 +72,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     filterRunnerList(filter.name);
-  }, [filter]);
+  }, [filter, filterRunnerList]);
 
   const initialValue = {
     filter,

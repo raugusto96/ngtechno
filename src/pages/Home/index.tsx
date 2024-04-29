@@ -2,7 +2,7 @@ import Button from "components/Button";
 import Footer from "components/Footer";
 import InputText from "components/Inputs/InputText";
 import ClassificationModal from "components/Modals/ClassificationModal/ClassificationModal";
-import useRunnersContext from "context/runnerContext";
+import useRunnersContext from "hooks/useRunnersContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
