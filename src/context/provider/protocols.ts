@@ -5,6 +5,8 @@ export interface IRunner {
   bruteTime: string;
   liquidTime: string;
   mediaPace: string;
+  teamTime: string;
   sexClassification: number;
   generalClassification: number;
+  teamClassification: number;
 }

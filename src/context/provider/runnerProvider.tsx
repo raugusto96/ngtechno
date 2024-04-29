@@ -10,6 +10,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   // States
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // const ngtechnoApi = new NgtechnoApi();
 
@@ -21,6 +22,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     idCorrida: number;
     numeroCorredor: number;
   }) => {
+    setIsLoading((prevState) => !prevState);
     console.log({ idCorrida, numeroCorredor });
     // const response = await ngtechnoApi.request({
     //   url: "/obterTempoCorredor",
@@ -31,10 +33,12 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // });
     // console.log(response);
     setRunner(mockRunner);
+    setIsLoading((prevState) => !prevState);
   };
 
   // Requisita a lista de corredores
   const getRunnersList = async (idCorrida: number) => {
+    setIsLoading((prevState) => !prevState);
     console.log(idCorrida);
     // const response = await ngtechnoApi.request({
     //   url: "/obterTempoCorredor",
@@ -44,6 +48,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // });
     // console.log(response);
     setRunnersList(mockRunnerList);
+    setIsLoading((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -54,6 +59,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const initialValue = {
     runner,
     runnersList,
+    isLoading,
   };
 
   return (

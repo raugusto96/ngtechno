@@ -7,8 +7,10 @@ export const mockRunner: IRunner = {
   bruteTime: "00:23:21",
   liquidTime: "00:23:21",
   mediaPace: "00:03:21",
+  teamTime: "F1234",
   generalClassification: 1,
   sexClassification: 1,
+  teamClassification: 1,
 };
 
 export const mockRunnerList: IRunner[] = [
@@ -19,8 +21,10 @@ export const mockRunnerList: IRunner[] = [
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",
     mediaPace: "00:03:21",
+    teamTime: "F1234",
     generalClassification: 1,
     sexClassification: 1,
+    teamClassification: 1,
   },
   {
     id: 1,
@@ -29,8 +33,10 @@ export const mockRunnerList: IRunner[] = [
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",
     mediaPace: "00:03:21",
+    teamTime: "F1234",
     generalClassification: 2,
     sexClassification: 2,
+    teamClassification: 2,
   },
   {
     id: 2,
@@ -39,7 +45,9 @@ export const mockRunnerList: IRunner[] = [
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",
     mediaPace: "00:03:21",
+    teamTime: "F1234",
     generalClassification: 3,
     sexClassification: 3,
+    teamClassification: 3,
   },
 ];
