@@ -14,24 +14,29 @@ export interface RequestApi {
 }
 
 interface ApiFetcher {
-  request: (params: RequestApi) => Promise<ResponseRPC>;
+  request: (params: RequestApi) => Promise<ResponseRPC | undefined>;
 }
 
 export default class NgtechnoApi implements ApiFetcher {
   constructor(private url: string = "https://cloudng.azurewebsites.net/api") {}
 
-  public async request(params: RequestApi): Promise<ResponseRPC> {
-    const { data } = await axios.request({
-      url: `${this.url}${params.url}`,
-      method: params.method,
-      params: params.body,
-    });
-    const responseRPC: ResponseRPC = {
-      sucesso: data.sucesso ? data.sucesso : false,
-      mensagem: data.mensagem ? data.mensagem : "",
-      retorno: data.retorno ? data.retorno : {},
-      exceptionType: data?.exceptionType ? data?.exceptionType : null,
-    };
-    return responseRPC;
+  public async request(params: RequestApi): Promise<ResponseRPC | undefined> {
+    try {
+      console.log(params);
+      const { data } = await axios.request({
+        url: `${this.url}${params.url}`,
+        method: params.method,
+        params: params.body,
+      });
+      const responseRPC: ResponseRPC = {
+        sucesso: data.sucesso ? data.sucesso : false,
+        mensagem: data.mensagem ? data.mensagem : "",
+        retorno: data.retorno ? data.retorno : {},
+        exceptionType: data?.exceptionType ? data?.exceptionType : null,
+      };
+      return responseRPC;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
