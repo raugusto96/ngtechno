@@ -1,10 +1,19 @@
 import Button from "components/Button";
 import Footer from "components/Footer";
+import LogoImage from "components/Images/Logo/LogoImage";
 import InputText from "components/Inputs/InputText";
 import ClassificationModal from "components/Modals/ClassificationModal/ClassificationModal";
+import assets from "config/assets";
 import useRunnersContext from "hooks/useRunnersContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  ContentContainer,
+  LogoContainer,
+  Paragraph,
+} from "./styles";
+import Title from "components/Texts/Headings/Title/Title";
 
 const Home: React.FC = () => {
   const { getRunner, isOpenModal, setIsOpenModal, runner } =
@@ -19,33 +28,37 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Preencha as informações abaixo para continuar</h2>
-      <form></form>
-      <InputText
-        id='chest-number-input'
-        name='idCorrida'
-        placeholder='Digite seu número de peito'
-        value={runnerNumber}
-        handleChange={handleRunnerNumber}
-      />
-      <Button
-        text='Buscar resultados'
-        handleClick={() => {
-          getRunner(Number(runnerNumber));
-          setRunnerNumber("");
-        }}
-      />
-      -ou-
-      <Button
-        text='Ver lista completa'
-        handleClick={() => navigate("/classificacoes")}
-      />
+    <Container>
+      <LogoContainer>
+        <LogoImage src={assets.images.logo.src} alt={assets.images.logo.alt} />
+      </LogoContainer>
+      <ContentContainer>
+        <Title>Preencha as informações abaixo para continuar</Title>
+        <InputText
+          id='chest-number-input'
+          name='idCorrida'
+          placeholder='Digite seu número de peito'
+          value={runnerNumber}
+          handleChange={handleRunnerNumber}
+        />
+        <Button
+          text='Buscar resultados'
+          handleClick={() => {
+            getRunner(Number(runnerNumber));
+            setRunnerNumber("");
+          }}
+        />
+        <Paragraph>-ou-</Paragraph>
+        <Button
+          text='Ver lista completa'
+          handleClick={() => navigate("/classificacoes")}
+        />
+      </ContentContainer>
       <Footer />
       {isOpenModal && (
         <ClassificationModal runner={runner} handleClose={setIsOpenModal} />
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -1,10 +1,13 @@
 import { ButtonProps } from "./protocol";
+import { ButtonContainer } from "./styles";
 
 const Button: React.FC<ButtonProps> = ({ text, handleClick }) => {
   return (
-    <button type='button' onClick={handleClick}>
-      {text}
-    </button>
+    <ButtonContainer>
+      <button type='button' onClick={handleClick}>
+        {text}
+      </button>
+    </ButtonContainer>
   );
 };
 
