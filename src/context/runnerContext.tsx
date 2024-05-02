@@ -8,7 +8,6 @@ type RunnerContextType = {
   runner: IRunner;
   runnersList: IRunner[];
   filteredRunnersList: IRunner[];
-  isLoading: boolean;
   openModal: IModal;
   handleOpenModal: (type: string, value: boolean) => void;
   errorMessage: string;

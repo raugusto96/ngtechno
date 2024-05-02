@@ -15,7 +15,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [filteredRunnersList, setFilteredRunnersList] = useState<IRunner[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<IModal>({
     classificationModal: false,
     completeListModal: false,
@@ -32,7 +31,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
           "Desculpe, número de peito não encontrado. Verifique se você o digitou corretamente."
         );
       }
-      setIsLoading((prevState) => !prevState);
       console.log(numeroCorredor);
       // const response = await ngtechnoApi.request({
       //   url: "/obterTempoCorredor",
@@ -44,7 +42,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
       // console.log(response);
       setRunner(mockRunner);
       handleOpenModal("classificationModal", true);
-      setIsLoading((prevState) => !prevState);
     } catch (error: any) {
       setErrorMessage(error.message);
       handleOpenModal("errorModal", true);
@@ -53,7 +50,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Requisita a lista de corredores
   const getRunnersList = async (idCorrida: number) => {
-    setIsLoading((prevState) => !prevState);
     console.log(idCorrida);
     // const response = await ngtechnoApi.request({
     //   url: "/obterTempoCorredor",
@@ -64,7 +60,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // console.log(response);
     setRunnersList(mockRunnerList);
     setFilteredRunnersList(mockRunnerList);
-    setIsLoading((prevState) => !prevState);
   };
 
   const filterRunnerList = useCallback(
@@ -81,12 +76,12 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     [runnersList]
   );
 
-  const handleOpenModal = (type: string, value: boolean) => {
+  const handleOpenModal = useCallback((type: string, value: boolean) => {
     setOpenModal((prevState) => ({
       ...prevState,
       [type]: value,
     }));
-  };
+  }, []);
 
   useEffect(() => {
     getRunnersList(1);
@@ -103,7 +98,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     runner,
     runnersList,
     filteredRunnersList,
-    isLoading,
     openModal,
     handleOpenModal,
     errorMessage,

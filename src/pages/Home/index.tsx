@@ -5,7 +5,7 @@ import InputText from "components/Inputs/InputText";
 import ClassificationModal from "components/Modals/ClassificationModal/ClassificationModal";
 import assets from "config/assets";
 import useRunnersContext from "hooks/useRunnersContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -28,6 +28,12 @@ const Home: React.FC = () => {
     const { value } = event.currentTarget;
     setRunnerNumber(value);
   };
+
+  useEffect(() => {
+    return () => {
+      handleOpenModal("completeListModal", false);
+    };
+  }, []);
 
   return (
     <Container>

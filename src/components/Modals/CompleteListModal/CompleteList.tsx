@@ -11,9 +11,11 @@ import Button from "components/Button";
 import { MdFemale } from "react-icons/md";
 import { MdMale } from "react-icons/md";
 import useRunnersContext from "hooks/useRunnersContext";
+import { useNavigate } from "react-router-dom";
 
 const CompleteListModal: React.FC = () => {
   const { handleOpenModal } = useRunnersContext();
+  const navigate = useNavigate();
 
   return (
     <ModalOverlay>
@@ -30,9 +32,11 @@ const CompleteListModal: React.FC = () => {
           <Button
             text='Feminino'
             icon={<MdFemale size='20px' opacity='0.5' />}
+            handleClick={() => navigate("classificacoes")}
           />
           <Button
             text='Masculino'
+            handleClick={() => navigate("classificacoes")}
             icon={<MdMale size='20px' opacity='0.5' />}
           />
         </ButtonContainer>
