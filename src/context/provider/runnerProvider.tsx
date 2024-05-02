@@ -68,7 +68,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
         setFilteredRunnersList(runnersList);
       } else {
         const filteredRunnerList = runnersList.filter((runner) =>
-          runner.name.toLowerCase().includes(name.toLowerCase())
+          runner.nome.toLowerCase().includes(name.toLowerCase())
         );
         setFilteredRunnersList(filteredRunnerList);
       }
