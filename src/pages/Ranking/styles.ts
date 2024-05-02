@@ -69,3 +69,14 @@ export const InputContainer = styled.div`
     }
   }
 `;
+
+export const TableContainer = styled.div`
+  display: flex;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;

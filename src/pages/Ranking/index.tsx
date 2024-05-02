@@ -6,6 +6,7 @@ import useRunnersContext from "hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineSearch } from "react-icons/md";
 import {
+  ButtonContainer,
   Container,
   HeaderContainer,
   InputContainer,
@@ -13,6 +14,7 @@ import {
   ListHeaderDescContainer,
   RankingSubtitle,
   RankingTitle,
+  TableContainer,
 } from "./styles";
 import LogoImage from "components/Images/Logo/LogoImage";
 import assets from "config/assets";
@@ -53,12 +55,12 @@ const Ranking: React.FC = () => {
           />
         </InputContainer>
       </ListHeaderContainer>
-      <section>
+      <TableContainer>
         <RunnersList />
-      </section>
-      <section>
+      </TableContainer>
+      <ButtonContainer>
         <Button text='Voltar' handleClick={() => navigate(-1)} />
-      </section>
+      </ButtonContainer>
     </Container>
   );
 };
