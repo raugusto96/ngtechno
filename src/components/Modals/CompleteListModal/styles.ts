@@ -7,11 +7,13 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  width: 30%;
 `;
 
 export const Paragraph = styled.p`
   color: ${styles.colors.blue["primary-1"]};
   font-size: 1.5rem;
+  text-align: center;
 `;
 
 export const SvgContainer = styled.div`
@@ -29,7 +31,7 @@ export const ButtonContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   & button {
-    width: 70%;
-    height: 80%;
+    width: 80%;
+    height: 100%;
   }
 `;
