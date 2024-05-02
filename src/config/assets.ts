@@ -7,6 +7,11 @@ import runner from "../assets/individual-results/icon_pacemedio.svg";
 import team from "../assets/individual-results/icon_equipe.svg";
 import whatsapp from "../assets/social-media/Vector.svg";
 import instagram from "../assets/social-media/Social Icons.svg";
+import medal1 from "../assets/medals/medal_1.svg";
+import medal2 from "../assets/medals/medal_2.svg";
+import medal3 from "../assets/medals/medal_3.svg";
+import medal4 from "../assets/medals/medal_4.svg";
+import medal5 from "../assets/medals/medal_5.svg";
 
 export default {
   images: {
@@ -52,6 +57,38 @@ export default {
               icon: {
                 src: team,
                 alt: "icone de equipe",
+              },
+            },
+          },
+          positions: {
+            first: {
+              icon: {
+                src: medal1,
+                alt: "icone de medalha de primeiro lugar",
+              },
+            },
+            second: {
+              icon: {
+                src: medal2,
+                alt: "icone de medalha de segundo lugar",
+              },
+            },
+            third: {
+              icon: {
+                src: medal3,
+                alt: "icone de medalha de terceiro lugar",
+              },
+            },
+            fourth: {
+              icon: {
+                src: medal4,
+                alt: "icone de medalha de quarto lugar",
+              },
+            },
+            fifth: {
+              icon: {
+                src: medal5,
+                alt: "icone de medalha de quinto lugar",
               },
             },
           },

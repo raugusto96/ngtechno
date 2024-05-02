@@ -1,7 +1,8 @@
 import { TableHeaderProps } from "./protocol";
+import { TableHeading } from "./styles";
 
 const TableHeader: React.FC<TableHeaderProps> = ({ text }) => {
-  return <th style={{ textTransform: "uppercase" }}>{text}</th>;
+  return <TableHeading>{text}</TableHeading>;
 };
 
 export default TableHeader;

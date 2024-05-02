@@ -71,7 +71,8 @@ export const InputContainer = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  display: flex;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 export const ButtonContainer = styled.div`

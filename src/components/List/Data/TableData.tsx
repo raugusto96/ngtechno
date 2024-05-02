@@ -1,7 +1,8 @@
 import { TableDataProps } from "./protocol";
+import { TableDataContainer } from "./styles";
 
 const TableData: React.FC<TableDataProps> = ({ data }) => {
-  return <td>{data}</td>;
+  return <TableDataContainer>{data}</TableDataContainer>;
 };
 
 export default TableData;

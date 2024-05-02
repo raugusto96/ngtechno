@@ -1,15 +1,17 @@
 export interface IRunner {
   id?: number;
-  name: string;
-  runnerNumber: number;
-  sex: string;
-  bruteTime: string;
-  liquidTime: string;
-  mediaPace: string;
-  teamTime: string;
-  sexClassification: number;
-  generalClassification: number;
-  teamClassification: number;
+  numero: number;
+  nome: string;
+  sexo: string;
+  tempoBruto: string;
+  tempoLiquido: string;
+  paceMedio: string;
+  tempoEquipe: string;
+  classSexo: number;
+  classGeral: number;
+  classCatTFE: number;
+  equipe: string;
+  modal: string;
 }
 
 export interface IFilter {

@@ -1,3 +1,3 @@
 export interface TableDataProps {
-  data: string | number;
+  data: string | number | React.ReactNode;
 }

@@ -3,6 +3,15 @@ import { useEffect, useState } from "react";
 import TableHeader from "./Header/TableHeader";
 import TableData from "./Data/TableData";
 import useRunnersContext from "hooks/useRunnersContext";
+import {
+  TableBodyContainer,
+  TableContainer,
+  TableHeaderContainer,
+  TableRowContainer,
+} from "./styles";
+import { tableHeaders } from "./mockData";
+import assets from "config/assets";
+import LogoImage from "components/Images/Logo/LogoImage";
 
 const RunnersList: React.FC = () => {
   const [runners, setRunners] = useState<IRunner[]>([]);
@@ -14,36 +23,93 @@ const RunnersList: React.FC = () => {
   }, [filteredRunnersList]);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <TableHeader text='n°' />
-          <TableHeader text='nome' />
-          <TableHeader text='sexo' />
-          <TableHeader text='tempo bruto' />
-          <TableHeader text='tempo líquido' />
-          <TableHeader text='pace médio' />
-          <TableHeader text='class. sexo' />
-          <TableHeader text='class. geral' />
-          <TableHeader text='class. equipe' />
-        </tr>
-      </thead>
-      <tbody>
+    <TableContainer>
+      <TableHeaderContainer>
+        <TableRowContainer>
+          {tableHeaders.map((row: string) => (
+            <TableHeader text={row} key={row} />
+          ))}
+        </TableRowContainer>
+      </TableHeaderContainer>
+      <TableBodyContainer>
         {runners.map((runner: IRunner) => (
-          <tr key={runner.id}>
-            <TableData data={runner.sexClassification} />
-            <TableData data={runner.name} />
-            <TableData data={runner.sex} />
-            <TableData data={runner.bruteTime} />
-            <TableData data={runner.liquidTime} />
-            <TableData data={runner.mediaPace} />
-            <TableData data={runner.sexClassification} />
-            <TableData data={runner.generalClassification} />
-            <TableData data={runner.teamClassification} />
-          </tr>
+          <TableRowContainer key={runner.id}>
+            <TableData
+              data={
+                runner.numero > 5 ? (
+                  runner.numero
+                ) : runner.numero === 1 ? (
+                  <LogoImage
+                    src={
+                      assets.svgs.medals.individual.classification.positions
+                        .first.icon.src
+                    }
+                    alt={
+                      assets.svgs.medals.individual.classification.positions
+                        .first.icon.alt
+                    }
+                  />
+                ) : runner.numero === 2 ? (
+                  <LogoImage
+                    src={
+                      assets.svgs.medals.individual.classification.positions
+                        .second.icon.src
+                    }
+                    alt={
+                      assets.svgs.medals.individual.classification.positions
+                        .second.icon.alt
+                    }
+                  />
+                ) : runner.numero === 3 ? (
+                  <LogoImage
+                    src={
+                      assets.svgs.medals.individual.classification.positions
+                        .third.icon.src
+                    }
+                    alt={
+                      assets.svgs.medals.individual.classification.positions
+                        .third.icon.alt
+                    }
+                  />
+                ) : runner.numero === 4 ? (
+                  <LogoImage
+                    src={
+                      assets.svgs.medals.individual.classification.positions
+                        .fourth.icon.src
+                    }
+                    alt={
+                      assets.svgs.medals.individual.classification.positions
+                        .fourth.icon.alt
+                    }
+                  />
+                ) : (
+                  <LogoImage
+                    src={
+                      assets.svgs.medals.individual.classification.positions
+                        .fifth.icon.src
+                    }
+                    alt={
+                      assets.svgs.medals.individual.classification.positions
+                        .fifth.icon.alt
+                    }
+                  />
+                )
+              }
+            />
+            <TableData data={runner.nome} />
+            <TableData data={runner.sexo} />
+            <TableData data={runner.tempoBruto} />
+            <TableData data={runner.tempoLiquido} />
+            <TableData data={runner.paceMedio} />
+            <TableData data={runner.classSexo} />
+            <TableData data={runner.classGeral} />
+            <TableData data={runner.classCatTFE} />
+            <TableData data={runner.equipe} />
+            <TableData data={runner.modal} />
+          </TableRowContainer>
         ))}
-      </tbody>
-    </table>
+      </TableBodyContainer>
+    </TableContainer>
   );
 };
 
