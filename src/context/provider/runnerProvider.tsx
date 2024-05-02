@@ -13,6 +13,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   });
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [filteredRunnersList, setFilteredRunnersList] = useState<IRunner[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<IModal>({
@@ -25,19 +26,31 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Requisita o corredor
   const getRunner = async (numeroCorredor: number) => {
-    setIsLoading((prevState) => !prevState);
-    console.log(numeroCorredor);
-    // const response = await ngtechnoApi.request({
-    //   url: "/obterTempoCorredor",
-    //   body: {
-    //     idCorrida,
-    //     numeroCorredor,
-    //   },
-    // });
-    // console.log(response);
-    setRunner(mockRunner);
-    handleOpenModal("classificationModal", true);
-    setIsLoading((prevState) => !prevState);
+    try {
+      const test = true;
+      if (test) {
+        throw new Error(
+          "Desculpe, número de peito não encontrado. Verifique se você o digitou corretamente."
+        );
+      }
+      setIsLoading((prevState) => !prevState);
+      console.log(numeroCorredor);
+      // const response = await ngtechnoApi.request({
+      //   url: "/obterTempoCorredor",
+      //   body: {
+      //     idCorrida,
+      //     numeroCorredor,
+      //   },
+      // });
+      // console.log(response);
+      setRunner(mockRunner);
+      handleOpenModal("classificationModal", true);
+      setIsLoading((prevState) => !prevState);
+    } catch (error: any) {
+      console.log(error);
+      setErrorMessage(error.message);
+      handleOpenModal("errorModal", true);
+    }
   };
 
   // Requisita a lista de corredores
@@ -95,6 +108,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     isLoading,
     openModal,
     handleOpenModal,
+    errorMessage,
   };
 
   return (

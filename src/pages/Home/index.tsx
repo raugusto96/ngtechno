@@ -15,9 +15,11 @@ import {
 } from "./styles";
 import Title from "components/Texts/Headings/Title/Title";
 import CompleteListModal from "components/Modals/CompleteListModal/CompleteList";
+import ErrorModal from "components/Modals/ErrorModal/ErrorModal";
 
 const Home: React.FC = () => {
-  const { getRunner, openModal, runner, handleOpenModal } = useRunnersContext();
+  const { getRunner, openModal, runner, handleOpenModal, errorMessage } =
+    useRunnersContext();
   // const navigate = useNavigate();
 
   const [runnerNumber, setRunnerNumber] = useState<string>("");
@@ -59,6 +61,7 @@ const Home: React.FC = () => {
         <ClassificationModal runner={runner} handleClose={handleOpenModal} />
       )}
       {openModal.completeListModal && <CompleteListModal />}
+      {openModal.errorModal && <ErrorModal errorMessage={errorMessage} />}
     </Container>
   );
 };

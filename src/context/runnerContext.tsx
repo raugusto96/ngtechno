@@ -11,6 +11,7 @@ type RunnerContextType = {
   isLoading: boolean;
   openModal: IModal;
   handleOpenModal: (type: string, value: boolean) => void;
+  errorMessage: string;
 };
 
 export const RunnersContext = createContext<RunnerContextType>(

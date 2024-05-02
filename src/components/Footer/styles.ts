@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const FooterContainer = styled.div`
   bottom: 0;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   @media (max-width: 600px) {
     margin-top: 0;
     margin-bottom: 1.5rem;
