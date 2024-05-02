@@ -27,6 +27,11 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   // Requisita o corredor
   const getRunner = async (numeroCorredor: number) => {
     try {
+      if (!numeroCorredor) {
+        throw new Error(
+          "Desculpe, número de peito não encontrado. Verifique se você o digitou corretamente."
+        );
+      }
       setIsLoading((prevState) => !prevState);
       console.log(numeroCorredor);
       // const response = await ngtechnoApi.request({
