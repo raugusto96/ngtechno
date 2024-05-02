@@ -17,7 +17,7 @@ const RunnersList: React.FC = () => {
     <table>
       <thead>
         <tr>
-          <TableHeader text='número' />
+          <TableHeader text='n°' />
           <TableHeader text='nome' />
           <TableHeader text='sexo' />
           <TableHeader text='tempo bruto' />

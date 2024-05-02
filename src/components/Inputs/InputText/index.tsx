@@ -7,10 +7,12 @@ const InputText: React.FC<InputTextProps> = ({
   placeholder,
   value,
   handleChange,
+  icon,
 }) => {
   return (
     <InputContainer>
       <label htmlFor={id}>
+        {icon}
         <input
           type='text'
           name={name}

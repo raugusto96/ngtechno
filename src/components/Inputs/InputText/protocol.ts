@@ -4,4 +4,5 @@ export interface InputTextProps {
   id: string;
   value?: string;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  icon?: React.ReactNode;
 }
