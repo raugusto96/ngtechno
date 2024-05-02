@@ -3,7 +3,7 @@ import { TitleContainer, TitleHeading } from "./styles";
 const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <TitleContainer>
-      <TitleHeading>{children}</TitleHeading>;
+      <TitleHeading>{children}</TitleHeading>
     </TitleContainer>
   );
 };

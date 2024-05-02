@@ -3,20 +3,22 @@ import { IRunner } from "./protocols";
 export const mockRunner: IRunner = {
   id: 1,
   name: "Maria Malachias",
+  runnerNumber: 699,
   sex: "F",
   bruteTime: "00:23:21",
   liquidTime: "00:23:21",
   mediaPace: "00:03:21",
   teamTime: "F1234",
-  generalClassification: 1,
-  sexClassification: 1,
-  teamClassification: 1,
+  generalClassification: 90,
+  sexClassification: 104,
+  teamClassification: 10,
 };
 
 export const mockRunnerList: IRunner[] = [
   {
     id: 0,
     name: "Maria Malachias",
+    runnerNumber: 699,
     sex: "F",
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",
@@ -30,6 +32,7 @@ export const mockRunnerList: IRunner[] = [
     id: 1,
     name: "Maria Malachias",
     sex: "F",
+    runnerNumber: 700,
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",
     mediaPace: "00:03:21",
@@ -41,6 +44,7 @@ export const mockRunnerList: IRunner[] = [
   {
     id: 2,
     name: "Marta Malachias",
+    runnerNumber: 701,
     sex: "F",
     bruteTime: "00:23:21",
     liquidTime: "00:23:21",

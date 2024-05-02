@@ -4,71 +4,153 @@ import IndividualTimeCard from "components/Cards/IndividualTimeCard/IndividualTi
 import SocialMediaIcon from "components/Icons/SocialMediaIcon/SocialMediaIcon";
 import { runnerTransition } from "config/transition";
 import { ClassificationModalProps } from "./protocol";
+import assets from "config/assets";
+import LogoImage from "components/Images/Logo/LogoImage";
+import {
+  ButtonsContainer,
+  ClassificationCardContainer,
+  ClassificationContainer,
+  ClassificationTimesContainer,
+  Container,
+  HeaderContainer,
+  RunnerDescContainer,
+  SocialMediaContainer,
+} from "./styles";
 
 const ClassificationModal: React.FC<ClassificationModalProps> = ({
   runner,
   handleClose,
 }) => {
   return (
-    <>
-      <section>
-        <h3>{runner.name}</h3>
-        <h4>
-          {runnerTransition.sex[runner?.sex.toLowerCase()]} | {runner.id}
-        </h4>
-      </section>
-      <section>
+    <Container>
+      <HeaderContainer>
+        <LogoImage src={assets.images.logo.src} alt={assets.images.logo.alt} />
+        <RunnerDescContainer>
+          <h3>{runner.name}</h3>
+          <h4>
+            {runnerTransition.sex[runner?.sex.toLowerCase()]} |{" "}
+            {runner.runnerNumber}
+          </h4>
+        </RunnerDescContainer>
+      </HeaderContainer>
+      <ClassificationContainer>
         <h2>Classifacações</h2>
-        <IndividualClassificationCard
-          category='Sexo'
-          classification={runner.sexClassification}
-          isPersonalBest={false}
-        />
-        <IndividualClassificationCard
-          category='Geral'
-          classification={runner.generalClassification}
-          isPersonalBest={false}
-        />
-        <IndividualClassificationCard
-          category='CatFE'
-          classification={runner.teamClassification}
-          isPersonalBest={true}
-        />
-      </section>
-      <section>
+        <ClassificationCardContainer>
+          <IndividualClassificationCard
+            category='Sexo'
+            classification={runner.sexClassification}
+            isPersonalBest={false}
+            backgroundColor='#F1E1F7'
+            paragraphColor='#BB6BD9'
+          />
+          <IndividualClassificationCard
+            category='Geral'
+            classification={runner.generalClassification}
+            isPersonalBest={false}
+            backgroundColor='#CDFBF8'
+            paragraphColor='#5ABEBD'
+          />
+          <IndividualClassificationCard
+            category='CatFE'
+            classification={runner.teamClassification}
+            isPersonalBest={true}
+            backgroundColor='#FFEDD8'
+            paragraphColor='#D9A06B'
+          />
+        </ClassificationCardContainer>
+      </ClassificationContainer>
+      <ClassificationTimesContainer>
         <IndividualTimeCard
           time={runner.liquidTime}
           label='Tempo Líquido'
-          icon='watch icon'
+          icon={
+            <LogoImage
+              src={
+                assets.svgs.medals.individual.classification.times.watch.icon
+                  .src
+              }
+              alt={
+                assets.svgs.medals.individual.classification.times.watch.icon
+                  .alt
+              }
+            />
+          }
         />
         <IndividualTimeCard
           time={runner.bruteTime}
           label='Tempo Bruto'
-          icon='ampulhete icon'
+          icon={
+            <LogoImage
+              src={
+                assets.svgs.medals.individual.classification.times.ampulhete
+                  .icon.src
+              }
+              alt={
+                assets.svgs.medals.individual.classification.times.ampulhete
+                  .icon.alt
+              }
+            />
+          }
         />
         <IndividualTimeCard
           time={runner.mediaPace}
           label='Pace Medio'
-          icon='ampulhete icon'
+          icon={
+            <LogoImage
+              src={
+                assets.svgs.medals.individual.classification.times.runner.icon
+                  .src
+              }
+              alt={
+                assets.svgs.medals.individual.classification.times.runner.icon
+                  .alt
+              }
+            />
+          }
         />
         <IndividualTimeCard
           time={runner.teamTime}
           label='Equipe'
-          icon='team icon'
+          icon={
+            <LogoImage
+              src={
+                assets.svgs.medals.individual.classification.times.team.icon.src
+              }
+              alt={
+                assets.svgs.medals.individual.classification.times.team.icon.alt
+              }
+            />
+          }
         />
-      </section>
-      <section>
+      </ClassificationTimesContainer>
+      <ButtonsContainer>
         <Button text='Baixar certificado' />
         <Button
           text='Fechar'
           handleClick={() => handleClose("classificationModal", false)}
         />
-      </section>
-      <section>
-        <SocialMediaIcon icon='Whatsapp' handleClick={() => []} />
-        <SocialMediaIcon icon='Insta' handleClick={() => []} />
-      </section>
-    </>
+      </ButtonsContainer>
+      <SocialMediaContainer>
+        <SocialMediaIcon
+          icon={
+            <LogoImage
+              src={assets.svgs.social.whatsapp.icon.src}
+              alt={assets.svgs.social.whatsapp.icon.alt}
+            />
+          }
+          handleClick={() => []}
+        />
+        <SocialMediaIcon
+          icon={
+            <LogoImage
+              src={assets.svgs.social.instagram.icon.src}
+              alt={assets.svgs.social.instagram.icon.alt}
+            />
+          }
+          handleClick={() => []}
+        />
+      </SocialMediaContainer>
+    </Container>
   );
 };
 

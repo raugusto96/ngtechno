@@ -8,6 +8,9 @@ export const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   width: 30%;
+  @media (max-width: 600px) {
+    width: 70%;
+  }
 `;
 
 export const Paragraph = styled.p`

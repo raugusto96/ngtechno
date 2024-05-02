@@ -1,4 +1,5 @@
 import { IndividualTimeCardProps } from "./protocol";
+import { Container, SvgContainer, TimeSubTitle, TimeTitle } from "./styles";
 
 const IndividualTimeCard: React.FC<IndividualTimeCardProps> = ({
   time,
@@ -6,11 +7,11 @@ const IndividualTimeCard: React.FC<IndividualTimeCardProps> = ({
   icon,
 }) => {
   return (
-    <div>
-      <h3>{time}</h3>
-      <h4>{label}</h4>
-      {icon}
-    </div>
+    <Container>
+      <TimeTitle>{time}</TimeTitle>
+      <TimeSubTitle>{label}</TimeSubTitle>
+      <SvgContainer>{icon}</SvgContainer>
+    </Container>
   );
 };
 

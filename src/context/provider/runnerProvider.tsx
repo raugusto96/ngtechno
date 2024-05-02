@@ -27,12 +27,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   // Requisita o corredor
   const getRunner = async (numeroCorredor: number) => {
     try {
-      const test = true;
-      if (test) {
-        throw new Error(
-          "Desculpe, número de peito não encontrado. Verifique se você o digitou corretamente."
-        );
-      }
       setIsLoading((prevState) => !prevState);
       console.log(numeroCorredor);
       // const response = await ngtechnoApi.request({
@@ -47,7 +41,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
       handleOpenModal("classificationModal", true);
       setIsLoading((prevState) => !prevState);
     } catch (error: any) {
-      console.log(error);
       setErrorMessage(error.message);
       handleOpenModal("errorModal", true);
     }

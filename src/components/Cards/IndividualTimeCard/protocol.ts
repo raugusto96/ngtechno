@@ -1,5 +1,5 @@
 export interface IndividualTimeCardProps {
   time: string;
   label: string;
-  icon: any;
+  icon: React.ReactNode;
 }

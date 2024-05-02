@@ -1,6 +1,7 @@
 export interface IRunner {
   id?: number;
   name: string;
+  runnerNumber: number;
   sex: string;
   bruteTime: string;
   liquidTime: string;

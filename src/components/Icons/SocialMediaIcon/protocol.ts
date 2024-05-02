@@ -1,4 +1,4 @@
 export interface SocialMediaIconProps {
-  icon: any;
+  icon: React.ReactNode;
   handleClick: (e: any) => void;
 }

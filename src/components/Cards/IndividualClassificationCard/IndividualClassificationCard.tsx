@@ -1,14 +1,37 @@
+import LogoImage from "components/Images/Logo/LogoImage";
 import { IndividualClassificationCardProps } from "./protocol";
+import {
+  ClassSubTitle,
+  ClassTitle,
+  Container,
+  IndividualClassificationContainer,
+} from "./styles";
+import assets from "config/assets";
 
 const IndividualClassificationCard: React.FC<
   IndividualClassificationCardProps
-> = ({ classification, category, isPersonalBest }) => {
+> = ({
+  classification,
+  category,
+  isPersonalBest,
+  backgroundColor,
+  paragraphColor,
+}) => {
   return (
-    <div>
-      {isPersonalBest && "MEDAL"}
-      {classification}
-      {category}
-    </div>
+    <Container backgroundColor={backgroundColor}>
+      {isPersonalBest && (
+        <LogoImage
+          src={assets.svgs.medals.individual.classification.icon.src}
+          alt={assets.svgs.medals.individual.classification.icon.alt}
+        />
+      )}
+      <IndividualClassificationContainer>
+        <ClassTitle>{classification}</ClassTitle>
+        <ClassSubTitle paragraphColor={paragraphColor}>
+          {category}
+        </ClassSubTitle>
+      </IndividualClassificationContainer>
+    </Container>
   );
 };
 
