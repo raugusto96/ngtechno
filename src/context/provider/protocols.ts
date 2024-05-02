@@ -14,3 +14,9 @@ export interface IRunner {
 export interface IFilter {
   name: string;
 }
+
+export interface IModal {
+  classificationModal: boolean;
+  completeListModal: boolean;
+  errorModal: boolean;
+}

@@ -59,7 +59,10 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
       </section>
       <section>
         <Button text='Baixar certificado' />
-        <Button text='Fechar' handleClick={() => handleClose(false)} />
+        <Button
+          text='Fechar'
+          handleClick={() => handleClose("classificationModal", false)}
+        />
       </section>
       <section>
         <SocialMediaIcon icon='Whatsapp' handleClick={() => []} />

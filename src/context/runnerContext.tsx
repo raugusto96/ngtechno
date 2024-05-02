@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { IFilter, IRunner } from "./provider/protocols";
+import { IFilter, IModal, IRunner } from "./provider/protocols";
 
 type RunnerContextType = {
   filter: IFilter;
@@ -9,8 +9,8 @@ type RunnerContextType = {
   runnersList: IRunner[];
   filteredRunnersList: IRunner[];
   isLoading: boolean;
-  isOpenModal: boolean;
-  setIsOpenModal: (value: boolean) => void;
+  openModal: IModal;
+  handleOpenModal: (type: string, value: boolean) => void;
 };
 
 export const RunnersContext = createContext<RunnerContextType>(

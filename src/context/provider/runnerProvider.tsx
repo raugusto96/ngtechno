@@ -1,7 +1,7 @@
 import { RunnersContext } from "context/runnerContext";
 import { useCallback, useEffect, useState } from "react";
 // import NgtechnoApi from "utils/api/ngtechnoApi";
-import { IFilter, IRunner } from "./protocols";
+import { IFilter, IModal, IRunner } from "./protocols";
 import { mockRunner, mockRunnerList } from "./mockData";
 
 const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -15,7 +15,11 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const [runnersList, setRunnersList] = useState<IRunner[]>([]);
   const [filteredRunnersList, setFilteredRunnersList] = useState<IRunner[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<IModal>({
+    classificationModal: false,
+    completeListModal: false,
+    errorModal: false,
+  });
 
   // const ngtechnoApi = new NgtechnoApi();
 
@@ -32,7 +36,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     // });
     // console.log(response);
     setRunner(mockRunner);
-    setIsOpenModal(true);
+    handleOpenModal("classificationModal", true);
     setIsLoading((prevState) => !prevState);
   };
 
@@ -66,6 +70,13 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     [runnersList]
   );
 
+  const handleOpenModal = (type: string, value: boolean) => {
+    setOpenModal((prevState) => ({
+      ...prevState,
+      [type]: value,
+    }));
+  };
+
   useEffect(() => {
     getRunnersList(1);
   }, []);
@@ -82,8 +93,8 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     runnersList,
     filteredRunnersList,
     isLoading,
-    isOpenModal,
-    setIsOpenModal,
+    openModal,
+    handleOpenModal,
   };
 
   return (

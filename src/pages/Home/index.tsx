@@ -6,7 +6,7 @@ import ClassificationModal from "components/Modals/ClassificationModal/Classific
 import assets from "config/assets";
 import useRunnersContext from "hooks/useRunnersContext";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   Container,
   ContentContainer,
@@ -14,11 +14,11 @@ import {
   Paragraph,
 } from "./styles";
 import Title from "components/Texts/Headings/Title/Title";
+import CompleteListModal from "components/Modals/CompleteListModal/CompleteList";
 
 const Home: React.FC = () => {
-  const { getRunner, isOpenModal, setIsOpenModal, runner } =
-    useRunnersContext();
-  const navigate = useNavigate();
+  const { getRunner, openModal, runner, handleOpenModal } = useRunnersContext();
+  // const navigate = useNavigate();
 
   const [runnerNumber, setRunnerNumber] = useState<string>("");
 
@@ -51,13 +51,14 @@ const Home: React.FC = () => {
         <Paragraph>-ou-</Paragraph>
         <Button
           text='Ver lista completa'
-          handleClick={() => navigate("/classificacoes")}
+          handleClick={() => handleOpenModal("completeListModal", true)}
         />
       </ContentContainer>
       <Footer />
-      {isOpenModal && (
-        <ClassificationModal runner={runner} handleClose={setIsOpenModal} />
+      {openModal.classificationModal && (
+        <ClassificationModal runner={runner} handleClose={handleOpenModal} />
       )}
+      {openModal.completeListModal && <CompleteListModal />}
     </Container>
   );
 };
