@@ -17,6 +17,8 @@ export const Container = styled.div`
 
 export const LogoContainer = styled.div`
   margin: 1rem 0;
+  display: flex;
+  justify-content: center;
   > img {
     max-width: 380px;
     border-radius: 1rem 1rem 0 0;
@@ -32,20 +34,17 @@ export const LogoContainer = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  @media (min-width: 600px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 0 1rem 1rem;
-    border: 1px solid ${styles.colors.blue["primary-1"]};
-    border-top: none;
-    width: calc(28% - 2px);
-    margin-top: -1.5rem;
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 1rem 1rem;
+  border: 1px solid ${styles.colors.blue["primary-1"]};
+  border-top: none;
+  width: 380px;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
   @media (max-width: 600px) {
-    width: 100%;
     margin-top: -1rem;
   }
 `;
