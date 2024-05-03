@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 1rem;
   gap: 1rem;
 `;
 
@@ -20,11 +21,15 @@ export const ListHeaderContainer = styled.div`
   width: 100%;
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 
   & img {
     width: 102px;
     border-radius: 1rem;
+  }
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
   }
 `;
 
@@ -49,6 +54,8 @@ export const RankingSubtitle = styled.h2`
 export const InputContainer = styled.div`
   display: flex;
   padding: 1rem;
+  width: 30%;
+  align-items: center;
   & div {
     position: relative;
 
@@ -67,6 +74,9 @@ export const InputContainer = styled.div`
         color: #b1b1b1;
       }
     }
+  }
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
 

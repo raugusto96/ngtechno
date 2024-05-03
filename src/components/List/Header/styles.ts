@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TableHeading = styled.th`
-  min-width: 8rem;
+  min-width: 10rem;
   max-width: 16rem;
   margin: 0;
   padding: 1rem;
@@ -11,4 +11,8 @@ export const TableHeading = styled.th`
   border-left: none;
   border-bottom: 1px solid #cacaca;
   font-size: 1.2rem;
+  @media (max-width: 600px) {
+    min-width: 8rem;
+    max-width: 16rem;
+  }
 `;

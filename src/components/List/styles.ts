@@ -20,7 +20,9 @@ export const TableHeaderContainer = styled.thead`
     top: 0;
     z-index: 50;
     height: auto;
-    display: block;
+    @media (max-width: 600px) {
+      display: block;
+    }
   }
 `;
 
@@ -65,5 +67,7 @@ export const TableRowContainer = styled.tr`
 `;
 
 export const TableBodyContainer = styled.tbody`
-  display: block;
+  @media (max-width: 600px) {
+    display: block;
+  }
 `;
