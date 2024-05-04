@@ -78,9 +78,13 @@ export const ClassificationContainer = styled.div`
 
 export const ClassificationCardContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+  justify-content: space-evenly;
+  padding: 1.5rem;
   width: 100%;
+  @media (max-width: 600px) {
+    justify-content: space-between;
+    padding: 1.5rem;
+  }
 `;
 
 export const ClassificationTimesContainer = styled.div`
