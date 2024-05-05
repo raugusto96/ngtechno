@@ -23,9 +23,7 @@ export const Container = styled.div`
   overflow-x: hidden;
   background-color: ${styles.colors.gray.gray2};
   @media (max-width: 600px) {
-    max-height: 100%;
-
-    overflow: hidden;
+    overflow-y: auto;
     width: 80%;
   }
 `;

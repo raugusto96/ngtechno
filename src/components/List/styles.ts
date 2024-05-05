@@ -34,9 +34,6 @@ export const TableRowContainer = styled.tr`
     td:first-child {
       text-align: left;
       font-weight: 600;
-      position: sticky;
-      left: 0px;
-      z-index: 40;
       background-color: white;
       border-top: none;
       border-right: none;
@@ -48,9 +45,6 @@ export const TableRowContainer = styled.tr`
     td:nth-child(2) {
       text-align: left;
       font-weight: 600;
-      position: sticky;
-      left: 8rem;
-      z-index: 40;
       background-color: white;
       border-top: none;
       border-right: 1px solid #cacaca;
