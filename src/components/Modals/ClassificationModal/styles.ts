@@ -79,6 +79,7 @@ export const ClassificationContainer = styled.div`
 export const ClassificationCardContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  overflow-y: scroll;
   padding: 1.5rem;
   width: 100%;
   @media (max-width: 600px) {
