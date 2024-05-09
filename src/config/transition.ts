@@ -1,6 +1,6 @@
 const sex: { [key: string]: string | undefined } = {
-  f: "Feminino",
-  m: "Masculino",
+  f6: "Feminino",
+  m6: "Masculino",
 };
 
 export const runnerTransition = {

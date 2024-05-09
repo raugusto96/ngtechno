@@ -1,17 +1,25 @@
 export interface IRunner {
-  id?: number;
-  numero: number;
   nome: string;
+  numero: string;
   sexo: string;
   tempoBruto: string;
   tempoLiquido: string;
   paceMedio: string;
-  tempoEquipe: string;
-  classSexo: number;
-  classGeral: number;
-  classCatTFE: number;
+  classSexo: string;
+  classGeral: string;
+  classCatFE: string;
   equipe: string;
   modal: string;
+  dist: string;
+  certificado: boolean;
+}
+
+export interface IRunnerList {
+  colunasCorrida: string[];
+  corridaFinalizada: boolean;
+  numeroCorredor: string;
+  suportaCertificado: boolean;
+  valoresCorrida: string[];
 }
 
 export interface IFilter {

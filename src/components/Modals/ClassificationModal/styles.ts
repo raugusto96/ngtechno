@@ -34,6 +34,9 @@ export const HeaderContainer = styled.div`
   border-radius: 1rem;
   background-color: white;
   gap: 1rem;
+  & div {
+    max-width: 50%;
+  }
   & img {
     width: 50%;
     border-radius: 1rem;

@@ -14,7 +14,7 @@ import useRunnersContext from "hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
 
 const CompleteListModal: React.FC = () => {
-  const { handleOpenModal } = useRunnersContext();
+  const { handleOpenModal, getRunnersList } = useRunnersContext();
   const navigate = useNavigate();
 
   return (
@@ -32,11 +32,17 @@ const CompleteListModal: React.FC = () => {
           <Button
             text='Feminino'
             icon={<MdFemale size='20px' opacity='0.5' />}
-            handleClick={() => navigate("classificacoes")}
+            handleClick={() => {
+              getRunnersList("F6");
+              navigate("/classificacoes");
+            }}
           />
           <Button
             text='Masculino'
-            handleClick={() => navigate("classificacoes")}
+            handleClick={() => {
+              getRunnersList("M6");
+              navigate("/classificacoes");
+            }}
             icon={<MdMale size='20px' opacity='0.5' />}
           />
         </ButtonContainer>

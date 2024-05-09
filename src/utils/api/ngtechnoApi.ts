@@ -22,11 +22,14 @@ export default class NgtechnoApi implements ApiFetcher {
 
   public async request(params: RequestApi): Promise<ResponseRPC | undefined> {
     try {
-      console.log(params);
       const { data } = await axios.request({
         url: `${this.url}${params.url}`,
         method: params.method,
         params: params.body,
+        headers: {
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        },
       });
       const responseRPC: ResponseRPC = {
         sucesso: data.sucesso ? data.sucesso : false,

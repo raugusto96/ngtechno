@@ -1,5 +1,5 @@
-import { IRunner } from "context/provider/protocols";
-import { useEffect, useState } from "react";
+import { IRunnerList } from "context/provider/protocols";
+import React, { useEffect, useState } from "react";
 import TableHeader from "./Header/TableHeader";
 import TableData from "./Data/TableData";
 import useRunnersContext from "hooks/useRunnersContext";
@@ -14,7 +14,7 @@ import assets from "config/assets";
 import LogoImage from "components/Images/Logo/LogoImage";
 
 const RunnersList: React.FC = () => {
-  const [runners, setRunners] = useState<IRunner[]>([]);
+  const [runners, setRunners] = useState<IRunnerList[]>([]);
 
   const { filteredRunnersList } = useRunnersContext();
 
@@ -32,13 +32,13 @@ const RunnersList: React.FC = () => {
         </TableRowContainer>
       </TableHeaderContainer>
       <TableBodyContainer>
-        {runners.map((runner: IRunner) => (
-          <TableRowContainer key={runner.id}>
+        {runners.map((runner: IRunnerList) => (
+          <TableRowContainer key={runner.numeroCorredor}>
             <TableData
               data={
-                runner.numero > 5 ? (
-                  runner.numero
-                ) : runner.numero === 1 ? (
+                Number(runner.valoresCorrida[5]) > 5 ? (
+                  Number(runner.valoresCorrida[5])
+                ) : Number(runner.valoresCorrida[5]) === 1 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -49,7 +49,7 @@ const RunnersList: React.FC = () => {
                         .first.icon.alt
                     }
                   />
-                ) : runner.numero === 2 ? (
+                ) : Number(runner.valoresCorrida[5]) === 2 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -60,7 +60,7 @@ const RunnersList: React.FC = () => {
                         .second.icon.alt
                     }
                   />
-                ) : runner.numero === 3 ? (
+                ) : Number(runner.valoresCorrida[5]) === 3 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -71,7 +71,7 @@ const RunnersList: React.FC = () => {
                         .third.icon.alt
                     }
                   />
-                ) : runner.numero === 4 ? (
+                ) : Number(runner.valoresCorrida[5]) === 4 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -96,16 +96,11 @@ const RunnersList: React.FC = () => {
                 )
               }
             />
-            <TableData data={runner.nome} />
-            <TableData data={runner.sexo} />
-            <TableData data={runner.tempoBruto} />
-            <TableData data={runner.tempoLiquido} />
-            <TableData data={runner.paceMedio} />
-            <TableData data={runner.classSexo} />
-            <TableData data={runner.classGeral} />
-            <TableData data={runner.classCatTFE} />
-            <TableData data={runner.equipe} />
-            <TableData data={runner.modal} />
+            {runner.valoresCorrida.map((value: string, index: number) => (
+              <React.Fragment key={index}>
+                <TableData data={value === "" ? "-" : value} />
+              </React.Fragment>
+            ))}
           </TableRowContainer>
         ))}
       </TableBodyContainer>

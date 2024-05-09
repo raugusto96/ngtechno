@@ -43,21 +43,21 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
           <ClassificationCardContainer>
             <IndividualClassificationCard
               category='Sexo'
-              classification={runner.classSexo}
+              classification={Number(runner.classSexo)}
               isPersonalBest={false}
               backgroundColor='#F1E1F7'
               paragraphColor='#BB6BD9'
             />
             <IndividualClassificationCard
               category='Geral'
-              classification={runner.classGeral}
+              classification={Number(runner.classGeral)}
               isPersonalBest={false}
               backgroundColor='#CDFBF8'
               paragraphColor='#5ABEBD'
             />
             <IndividualClassificationCard
               category='CatFE'
-              classification={runner.classCatTFE}
+              classification={Number(runner.classCatFE)}
               isPersonalBest={true}
               backgroundColor='#FFEDD8'
               paragraphColor='#D9A06B'
@@ -114,7 +114,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runner.tempoEquipe}
+            time={runner.equipe}
             label='Equipe'
             icon={
               <LogoImage
@@ -131,7 +131,8 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
           />
         </ClassificationTimesContainer>
         <ButtonsContainer>
-          <Button text='Baixar certificado' />
+          {runner.certificado && <Button text='Baixar certificado' />}
+
           <Button
             text='Fechar'
             handleClick={() => handleClose("classificationModal", false)}

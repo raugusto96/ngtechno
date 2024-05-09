@@ -10,4 +10,5 @@ export const tableHeaders: string[] = [
   "Class CatFE",
   "Equipe",
   "Modal",
+  "Dist",
 ];
