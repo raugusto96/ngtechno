@@ -85,6 +85,10 @@ export const TableContainer = styled.div`
   overflow-x: auto;
 `;
 
+export const PaginationContainer = styled.div`
+  display: flex;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   width: 100%;

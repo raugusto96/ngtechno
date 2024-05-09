@@ -12,12 +12,14 @@ import {
   InputContainer,
   ListHeaderContainer,
   ListHeaderDescContainer,
+  PaginationContainer,
   RankingSubtitle,
   RankingTitle,
   TableContainer,
 } from "./styles";
 import LogoImage from "components/Images/Logo/LogoImage";
 import assets from "config/assets";
+import Paginate from "components/Pagination/Paginate/Paginate";
 
 const Ranking: React.FC = () => {
   const navigate = useNavigate();
@@ -58,6 +60,9 @@ const Ranking: React.FC = () => {
       <TableContainer>
         <RunnersList />
       </TableContainer>
+      <PaginationContainer>
+        <Paginate />
+      </PaginationContainer>
       <ButtonContainer>
         <Button text='Voltar' handleClick={() => navigate(-1)} />
       </ButtonContainer>

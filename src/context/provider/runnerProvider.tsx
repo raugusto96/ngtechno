@@ -12,7 +12,8 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   });
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
   const [runnersList, setRunnersList] = useState<IRunnerList[]>([]);
-  const [page, setPage] = useState<string>("1");
+  const [page, setPage] = useState<number>(1);
+  const [maxPages, setMaxPages] = useState<number>(1);
   const [paginatedRunners, setPaginatedRunners] = useState<IRunnerList[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [filteredRunnersList, setFilteredRunnersList] = useState<IRunnerList[]>(
@@ -54,7 +55,6 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
         dist: response?.retorno.valoresCorrida[10],
         certificado: response?.retorno.suportaCertificado,
       };
-      console.log(formatedRunner);
       setRunner(formatedRunner);
       handleOpenModal("classificationModal", true);
     } catch (error: any) {
@@ -86,6 +86,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     const maxResults = pageNumber * pageSize + pageSize;
     const paginatedList = list.slice(initial, maxResults);
     setPaginatedRunners(paginatedList);
+    setMaxPages(Math.ceil(list.length / pageSize));
   };
 
   const filterRunnerList = useCallback(
@@ -127,6 +128,9 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     paginatedRunners,
     filteredRunnersList,
     openModal,
+    page,
+    setPage,
+    maxPages,
     handleOpenModal,
     errorMessage,
   };
