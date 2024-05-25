@@ -1,11 +1,11 @@
-import Button from "components/Button";
-import IndividualClassificationCard from "components/Cards/IndividualClassificationCard/IndividualClassificationCard";
-import IndividualTimeCard from "components/Cards/IndividualTimeCard/IndividualTimeCard";
-import SocialMediaIcon from "components/Icons/SocialMediaIcon/SocialMediaIcon";
-import { runnerTransition } from "config/transition";
+import Button from "../../../components/Button";
+import IndividualClassificationCard from "../../../components/Cards/IndividualClassificationCard/IndividualClassificationCard";
+import IndividualTimeCard from "../../../components/Cards/IndividualTimeCard/IndividualTimeCard";
+import SocialMediaIcon from "../../../components/Icons/SocialMediaIcon/SocialMediaIcon";
+import { runnerTransition } from "../../../config/transition";
 import { ClassificationModalProps } from "./protocol";
-import assets from "config/assets";
-import LogoImage from "components/Images/Logo/LogoImage";
+import assets from "../../../config/assets";
+import LogoImage from "../../../components/Images/Logo/LogoImage";
 import {
   ButtonsContainer,
   ClassificationCardContainer,

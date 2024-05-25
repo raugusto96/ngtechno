@@ -1,6 +1,6 @@
-import { RunnersContext } from "context/runnerContext";
+import { RunnersContext } from "../runnerContext";
 import { useCallback, useEffect, useState } from "react";
-import NgtechnoApi from "utils/api/ngtechnoApi";
+import NgtechnoApi from "../../utils/api/ngtechnoApi";
 import { IFilter, IModal, IRunner, IRunnerList } from "./protocols";
 
 const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({

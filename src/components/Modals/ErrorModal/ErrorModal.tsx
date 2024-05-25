@@ -1,10 +1,10 @@
-import Title from "components/Texts/Headings/Title/Title";
-import styles from "config/styles";
+import Title from "../../../components/Texts/Headings/Title/Title";
+import styles from "../../../config/styles";
 import { MdWarning } from "react-icons/md";
 import { Container, ModalOverlay, Paragraph } from "./styles";
 import { ErrorModalProps } from "./protocol";
-import Button from "components/Button";
-import useRunnersContext from "hooks/useRunnersContext";
+import Button from "../../../components/Button";
+import useRunnersContext from "../../../hooks/useRunnersContext";
 
 const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage }) => {
   const { handleOpenModal } = useRunnersContext();

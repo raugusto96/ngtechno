@@ -1,4 +1,4 @@
-import styles from "config/styles";
+import styles from "../../../config/styles";
 import styled from "styled-components";
 
 export const InputContainer = styled.div`

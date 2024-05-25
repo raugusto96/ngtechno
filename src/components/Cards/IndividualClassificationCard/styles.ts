@@ -3,7 +3,7 @@ import {
   IndividualClassificationCardStyledProps,
   IndividualClassificationParagraphStyledProps,
 } from "./protocol";
-import styles from "config/styles";
+import styles from "../../../config/styles";
 
 export const Container = styled.div<IndividualClassificationCardStyledProps>`
   background-color: ${({ backgroundColor }) => backgroundColor};

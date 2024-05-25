@@ -1,4 +1,4 @@
-import { RunnersContext } from "context/runnerContext";
+import { RunnersContext } from "../context/runnerContext";
 import { useContext } from "react";
 
 const useRunnersContext = () => useContext(RunnersContext);

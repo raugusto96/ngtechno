@@ -1,4 +1,4 @@
-import Title from "components/Texts/Headings/Title/Title";
+import Title from "../../../components/Texts/Headings/Title/Title";
 import {
   ButtonContainer,
   Container,
@@ -6,11 +6,11 @@ import {
   Paragraph,
   SvgContainer,
 } from "./styles";
-import assets from "config/assets";
-import Button from "components/Button";
+import assets from "../../../config/assets";
+import Button from "../../../components/Button";
 import { MdFemale } from "react-icons/md";
 import { MdMale } from "react-icons/md";
-import useRunnersContext from "hooks/useRunnersContext";
+import useRunnersContext from "../../../hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
 
 const CompleteListModal: React.FC = () => {

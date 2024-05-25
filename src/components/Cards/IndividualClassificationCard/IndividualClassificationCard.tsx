@@ -1,4 +1,4 @@
-import LogoImage from "components/Images/Logo/LogoImage";
+import LogoImage from "../../../components/Images/Logo/LogoImage";
 import { IndividualClassificationCardProps } from "./protocol";
 import {
   ClassSubTitle,
@@ -6,7 +6,7 @@ import {
   Container,
   IndividualClassificationContainer,
 } from "./styles";
-import assets from "config/assets";
+import assets from "../../../config/assets";
 
 const IndividualClassificationCard: React.FC<
   IndividualClassificationCardProps

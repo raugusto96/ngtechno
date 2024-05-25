@@ -1,5 +1,5 @@
 import React from "react";
-import useRunnersContext from "hooks/useRunnersContext";
+import useRunnersContext from "../../../hooks/useRunnersContext";
 import { PaginateProps } from "./protocol";
 import { Container, PaginateContainer, PaginateNumber } from "./styles";
 

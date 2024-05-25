@@ -1,10 +1,10 @@
-import Button from "components/Button";
-import Footer from "components/Footer";
-import LogoImage from "components/Images/Logo/LogoImage";
-import InputText from "components/Inputs/InputText";
-import ClassificationModal from "components/Modals/ClassificationModal/ClassificationModal";
-import assets from "config/assets";
-import useRunnersContext from "hooks/useRunnersContext";
+import Button from "../../components/Button";
+import Footer from "../../components/Footer";
+import LogoImage from "../../components/Images/Logo/LogoImage";
+import InputText from "../../components/Inputs/InputText";
+import ClassificationModal from "../../components/Modals/ClassificationModal/ClassificationModal";
+import assets from "../../config/assets";
+import useRunnersContext from "../../hooks/useRunnersContext";
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import {
@@ -13,9 +13,9 @@ import {
   LogoContainer,
   Paragraph,
 } from "./styles";
-import Title from "components/Texts/Headings/Title/Title";
-import CompleteListModal from "components/Modals/CompleteListModal/CompleteList";
-import ErrorModal from "components/Modals/ErrorModal/ErrorModal";
+import Title from "../../components/Texts/Headings/Title/Title";
+import CompleteListModal from "../../components/Modals/CompleteListModal/CompleteList";
+import ErrorModal from "../../components/Modals/ErrorModal/ErrorModal";
 
 const Home: React.FC = () => {
   const { getRunner, openModal, runner, handleOpenModal, errorMessage } =

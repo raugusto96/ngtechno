@@ -1,8 +1,8 @@
-import { IRunnerList } from "context/provider/protocols";
+import { IRunnerList } from "../../context/provider/protocols";
 import React, { useEffect, useState } from "react";
 import TableHeader from "./Header/TableHeader";
 import TableData from "./Data/TableData";
-import useRunnersContext from "hooks/useRunnersContext";
+import useRunnersContext from "../../hooks/useRunnersContext";
 import {
   TableBodyContainer,
   TableContainer,
@@ -10,8 +10,8 @@ import {
   TableRowContainer,
 } from "./styles";
 import { tableHeaders } from "./mockData";
-import assets from "config/assets";
-import LogoImage from "components/Images/Logo/LogoImage";
+import assets from "../../config/assets";
+import LogoImage from "../../components/Images/Logo/LogoImage";
 
 const RunnersList: React.FC = () => {
   const [runners, setRunners] = useState<IRunnerList[]>([]);

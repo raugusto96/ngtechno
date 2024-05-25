@@ -1,8 +1,8 @@
-import Button from "components/Button";
-import InputText from "components/Inputs/InputText";
-import RunnersList from "components/List/RunnersList";
-import { IFilter } from "context/provider/protocols";
-import useRunnersContext from "hooks/useRunnersContext";
+import Button from "../../components/Button";
+import InputText from "../../components/Inputs/InputText";
+import RunnersList from "../../components/List/RunnersList";
+import { IFilter } from "../../context/provider/protocols";
+import useRunnersContext from "../../hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineSearch } from "react-icons/md";
 import {
@@ -17,9 +17,9 @@ import {
   RankingTitle,
   TableContainer,
 } from "./styles";
-import LogoImage from "components/Images/Logo/LogoImage";
-import assets from "config/assets";
-import Paginate from "components/Pagination/Paginate/Paginate";
+import LogoImage from "../../components/Images/Logo/LogoImage";
+import assets from "../../config/assets";
+import Paginate from "../../components/Pagination/Paginate/Paginate";
 
 const Ranking: React.FC = () => {
   const navigate = useNavigate();

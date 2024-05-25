@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import styles from "config/styles";
+import styles from "../../config/styles";
 
 export const Container = styled.div`
   font-family: ${styles.fonts.family.font};
