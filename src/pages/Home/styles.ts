@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 
   background-color: ${styles.colors.white.primary};
   @media (max-width: 600px) {

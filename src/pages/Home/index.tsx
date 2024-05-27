@@ -6,7 +6,6 @@ import ClassificationModal from "../../components/Modals/ClassificationModal/Cla
 import assets from "../../config/assets";
 import useRunnersContext from "../../hooks/useRunnersContext";
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import {
   Container,
   ContentContainer,
@@ -16,13 +15,25 @@ import {
 import Title from "../../components/Texts/Headings/Title/Title";
 import CompleteListModal from "../../components/Modals/CompleteListModal/CompleteList";
 import ErrorModal from "../../components/Modals/ErrorModal/ErrorModal";
+import { useSearchParams } from "react-router-dom";
 
 const Home: React.FC = () => {
-  const { getRunner, openModal, runner, handleOpenModal, errorMessage } =
-    useRunnersContext();
-  // const navigate = useNavigate();
+  const {
+    getRunner,
+    openModal,
+    runner,
+    handleOpenModal,
+    logoSrc,
+    errorMessage,
+    setRunId,
+    isListButtonVisible,
+    setSelectedCategory,
+    setSexesOptions,
+  } = useRunnersContext();
 
   const [runnerNumber, setRunnerNumber] = useState<string>("");
+
+  const [searchParams] = useSearchParams();
 
   const handleRunnerNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
@@ -30,15 +41,22 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
+    const runId = searchParams.get("idCorrida");
+    if (runId) setRunId(runId);
+  }, []);
+
+  useEffect(() => {
     return () => {
       handleOpenModal("completeListModal", false);
+      setSelectedCategory("");
+      setSexesOptions([]);
     };
   }, []);
 
   return (
     <Container>
       <LogoContainer>
-        <LogoImage src={assets.images.logo.src} alt={assets.images.logo.alt} />
+        <LogoImage src={logoSrc} alt={assets.images.logo.alt} />
       </LogoContainer>
       <ContentContainer>
         <Title>Preencha as informações abaixo para continuar</Title>
@@ -56,11 +74,15 @@ const Home: React.FC = () => {
             setRunnerNumber("");
           }}
         />
-        <Paragraph>-ou-</Paragraph>
-        <Button
-          text='Ver lista completa'
-          handleClick={() => handleOpenModal("completeListModal", true)}
-        />
+        {isListButtonVisible && (
+          <>
+            <Paragraph>-ou-</Paragraph>
+            <Button
+              text='Ver lista completa'
+              handleClick={() => handleOpenModal("completeListModal", true)}
+            />
+          </>
+        )}
       </ContentContainer>
       <Footer />
       {openModal.classificationModal && (

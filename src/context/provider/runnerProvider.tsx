@@ -1,7 +1,14 @@
 import { RunnersContext } from "../runnerContext";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import NgtechnoApi from "../../utils/api/ngtechnoApi";
-import { IFilter, IModal, IRunner, IRunnerList } from "./protocols";
+import {
+  IFilter,
+  IModal,
+  IPublicFilter,
+  IRunner,
+  IRunnerList,
+} from "./protocols";
+import axios from "axios";
 
 const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -11,6 +18,15 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     name: "",
   });
   const [runner, setRunner] = useState<IRunner>({} as IRunner);
+  const [runId, setRunId] = useState<string>("");
+  const [logoSrc, setLogoSrc] = useState<string>("");
+  const [runGuid, setRunGuid] = useState<string>("");
+  const [certifiedUrl, setCertifiedUrl] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [categoriesOptions, setCategoriesOptions] = useState<string[]>([]);
+  const [sexesOptions, setSexesOptions] = useState<string[]>([]);
+  const [isListButtonVisible, setIsListButtonVisible] =
+    useState<boolean>(false);
   const [runnersList, setRunnersList] = useState<IRunnerList[]>([]);
   const [page, setPage] = useState<number>(1);
   const [maxPages, setMaxPages] = useState<number>(1);
@@ -25,7 +41,82 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     errorModal: false,
   });
 
-  const ngtechnoApi = new NgtechnoApi();
+  const ngtechnoApi = useMemo(() => new NgtechnoApi(), []);
+
+  const getRunLogo = useCallback(async () => {
+    const { data } = await axios.get(
+      `https://cloudng.azurewebsites.net/home/ObterLogoCorrida?idCorrida=${runId}`,
+      {
+        responseType: "blob",
+        headers: {
+          Accept: "image/png",
+        },
+      }
+    );
+    const logoUrl = URL.createObjectURL(data);
+    setLogoSrc(logoUrl);
+  }, [runId]);
+
+  const getRunById = useCallback(async () => {
+    const response = await ngtechnoApi.request({
+      url: "/ObterCorridaPorIdCorrida",
+      body: {
+        idCorrida: runId,
+      },
+    });
+    setRunGuid(response?.retorno?.guidCorrida);
+    setIsListButtonVisible(response?.retorno.suportaFiltroPublico);
+  }, [ngtechnoApi, runId]);
+
+  const getListPossibleValues = useCallback(async () => {
+    const response = await ngtechnoApi.request({
+      url: "/ListarValoresPossiveisFiltroPublico",
+      body: {
+        guidCorrida: runGuid,
+      },
+    });
+    setCategoriesOptions(
+      Array.from(
+        new Set(
+          response?.retorno
+            .filter((filter: IPublicFilter) => filter.readable !== "Sexo")
+            .map((option: IPublicFilter) => option.readable.slice(1))
+            .sort((a: any, b: any) => a - b)
+        )
+      )
+    );
+    setSexesOptions(
+      selectedCategory
+        ? Array.from(
+            new Set(
+              response?.retorno
+                .filter((filter: IPublicFilter) => filter.readable !== "Sexo")
+                .filter(
+                  (option: IPublicFilter) =>
+                    option.readable.slice(1) === selectedCategory
+                )
+                .map((option: any) => option.readable[0])
+            )
+          )
+        : []
+    );
+  }, [ngtechnoApi, runGuid, selectedCategory]);
+
+  const getCertifiedByRunner = useCallback(
+    async (numeroCorredor: number) => {
+      const { data } = await axios.get(
+        `https://cloudng.azurewebsites.net/home/ObterCertificadoCorredor?idCorrida=${runId}&numeroCorredor=${numeroCorredor}`,
+        {
+          responseType: "blob",
+          headers: {
+            Accept: "image/png",
+          },
+        }
+      );
+      setCertifiedUrl(URL.createObjectURL(data));
+    },
+    [runId]
+  );
 
   // Requisita o corredor
   const getRunner = async (numeroCorredor: number) => {
@@ -36,10 +127,11 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await ngtechnoApi.request({
         url: "/obterTempoCorredor",
         body: {
-          idCorrida: "ROSA",
+          idCorrida: runId,
           numeroCorredor,
         },
       });
+      if (!response?.sucesso) throw new Error(response?.mensagem);
       const formatedRunner = {
         nome: response?.retorno.valoresCorrida[0],
         numero: response?.retorno.numeroCorredor,
@@ -58,6 +150,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
       setRunner(formatedRunner);
       handleOpenModal("classificationModal", true);
     } catch (error: any) {
+      console.log(error);
       setErrorMessage(error.message);
       handleOpenModal("errorModal", true);
     }
@@ -68,7 +161,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     const response = await ngtechnoApi.request({
       url: "/ListarTemposCorridaPorFiltro",
       body: {
-        guidCorrida: "7541a776-75d0-4c97-b47d-b0c700db7e08",
+        guidCorrida: runGuid,
         valorFiltroUrlEncoded: filterValue,
       },
     });
@@ -111,6 +204,12 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   useEffect(() => {
+    getRunLogo();
+    getRunById();
+    getListPossibleValues();
+  }, [getListPossibleValues, getRunById, getRunLogo, runId]);
+
+  useEffect(() => {
     filterRunnerList(filter.name);
   }, [filter, filterRunnerList]);
 
@@ -122,7 +221,18 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     filter,
     setFilter,
     getRunner,
+    logoSrc,
+    setRunId,
+    sexesOptions,
     getRunnersList,
+    setCategoriesOptions,
+    isListButtonVisible,
+    setSelectedCategory,
+    selectedCategory,
+    setSexesOptions,
+    categoriesOptions,
+    getCertifiedByRunner,
+    certifiedUrl,
     runner,
     runnersList,
     paginatedRunners,

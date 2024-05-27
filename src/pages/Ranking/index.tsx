@@ -23,7 +23,7 @@ import Paginate from "../../components/Pagination/Paginate/Paginate";
 
 const Ranking: React.FC = () => {
   const navigate = useNavigate();
-  const { setFilter, filter } = useRunnersContext();
+  const { setFilter, filter, logoSrc } = useRunnersContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -37,10 +37,7 @@ const Ranking: React.FC = () => {
     <Container>
       <ListHeaderContainer>
         <HeaderContainer>
-          <LogoImage
-            src={assets.images.logo.src}
-            alt={assets.images.logo.alt}
-          />
+          <LogoImage src={logoSrc} alt={assets.images.logo.alt} />
           <ListHeaderDescContainer>
             <RankingTitle>Lista completa</RankingTitle>
             <RankingSubtitle>Feminino</RankingSubtitle>

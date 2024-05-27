@@ -17,7 +17,7 @@ export default {
   images: {
     logo: {
       src: logo,
-      alt: "corrida do rosa logo",
+      alt: "logo da corrida",
     },
   },
   svgs: {

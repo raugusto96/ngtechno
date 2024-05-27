@@ -12,10 +12,23 @@ import { MdFemale } from "react-icons/md";
 import { MdMale } from "react-icons/md";
 import useRunnersContext from "../../../hooks/useRunnersContext";
 import { useNavigate } from "react-router-dom";
+import InputSelect from "components/Inputs/InputSelect";
 
 const CompleteListModal: React.FC = () => {
-  const { handleOpenModal, getRunnersList } = useRunnersContext();
+  const {
+    handleOpenModal,
+    getRunnersList,
+    logoSrc,
+    categoriesOptions,
+    selectedCategory,
+    setSelectedCategory,
+    sexesOptions,
+  } = useRunnersContext();
   const navigate = useNavigate();
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(event.target.value);
+  };
 
   return (
     <ModalOverlay>
@@ -23,15 +36,37 @@ const CompleteListModal: React.FC = () => {
         <Title>Lista Completa</Title>
         <Paragraph>Selecione o grupo que deseja visualizar a lista</Paragraph>
         <SvgContainer>
-          <img
-            src={assets.svgs.list.icon.src}
-            alt={assets.svgs.list.icon.alt}
-          />
+          <img src={logoSrc} alt={assets.svgs.list.icon.alt} />
         </SvgContainer>
+        <Paragraph>Selecione a categoria da corrida</Paragraph>
+
+        <InputSelect
+          handleChange={handleChange}
+          name='run-category'
+          placeholder='Selecione a categoria'
+          options={categoriesOptions}
+        />
         <ButtonContainer>
-          <Button
+          {selectedCategory &&
+            sexesOptions.map((option: string) => (
+              <Button
+                text={option === "F" ? "Feminino" : "Masculino"}
+                icon={
+                  option === "F" ? (
+                    <MdFemale size='20px' opacity='0.5' />
+                  ) : (
+                    <MdMale size='20px' opacity='0.5' />
+                  )
+                }
+                handleClick={() => {
+                  getRunnersList(`${option}${selectedCategory}`);
+                  navigate("/classificacoes");
+                }}
+              />
+            ))}
+          {/* <Button
             text='Feminino'
-            icon={<MdFemale size='20px' opacity='0.5' />}
+            icon={}
             handleClick={() => {
               getRunnersList("F6");
               navigate("/classificacoes");
@@ -44,7 +79,7 @@ const CompleteListModal: React.FC = () => {
               navigate("/classificacoes");
             }}
             icon={<MdMale size='20px' opacity='0.5' />}
-          />
+          /> */}
         </ButtonContainer>
         <Button
           text='Voltar'

@@ -17,19 +17,27 @@ import {
   RunnerDescContainer,
   SocialMediaContainer,
 } from "./styles";
+import useRunnersContext from "hooks/useRunnersContext";
+import { useCallback } from "react";
 
 const ClassificationModal: React.FC<ClassificationModalProps> = ({
   runner,
   handleClose,
 }) => {
+  const { logoSrc, getCertifiedByRunner, certifiedUrl } = useRunnersContext();
+
+  const handleOpenCertified = useCallback(() => {
+    window.open(certifiedUrl, "_blank");
+
+    // Liberar a URL do objeto após o download
+    window.URL.revokeObjectURL(certifiedUrl);
+  }, [certifiedUrl]);
+
   return (
     <ModalOverlay>
       <Container>
         <HeaderContainer>
-          <LogoImage
-            src={assets.images.logo.src}
-            alt={assets.images.logo.alt}
-          />
+          <LogoImage src={logoSrc} alt={assets.images.logo.alt} />
           <RunnerDescContainer>
             <h3>{runner.nome}</h3>
             <h4>
@@ -58,7 +66,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             <IndividualClassificationCard
               category='CatFE'
               classification={Number(runner.classCatFE)}
-              isPersonalBest={true}
+              isPersonalBest={Number(runner.classCatFE) > 0 ? true : false}
               backgroundColor='#FFEDD8'
               paragraphColor='#D9A06B'
             />
@@ -131,7 +139,15 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
           />
         </ClassificationTimesContainer>
         <ButtonsContainer>
-          {runner.certificado && <Button text='Baixar certificado' />}
+          {runner.certificado && (
+            <Button
+              text='Baixar certificado'
+              handleClick={() => {
+                getCertifiedByRunner(Number(runner.numero));
+                handleOpenCertified();
+              }}
+            />
+          )}
 
           <Button
             text='Fechar'

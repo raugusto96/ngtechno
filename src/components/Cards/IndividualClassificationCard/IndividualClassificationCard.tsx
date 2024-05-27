@@ -26,7 +26,7 @@ const IndividualClassificationCard: React.FC<
         />
       )}
       <IndividualClassificationContainer>
-        <ClassTitle>{classification}</ClassTitle>
+        <ClassTitle>{classification ? classification : 0}</ClassTitle>
         <ClassSubTitle paragraphColor={paragraphColor}>
           {category}
         </ClassSubTitle>

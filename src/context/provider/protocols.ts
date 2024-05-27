@@ -31,3 +31,9 @@ export interface IModal {
   completeListModal: boolean;
   errorModal: boolean;
 }
+
+export interface IPublicFilter {
+  urlEncoded: string;
+  readable: string;
+  guidCorrida: string;
+}
