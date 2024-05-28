@@ -37,3 +37,7 @@ export interface IPublicFilter {
   readable: string;
   guidCorrida: string;
 }
+
+export type Run = {
+  [key: string]: string | undefined;
+};

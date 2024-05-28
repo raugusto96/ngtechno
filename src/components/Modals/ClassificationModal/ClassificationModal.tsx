@@ -24,7 +24,9 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
   runner,
   handleClose,
 }) => {
-  const { logoSrc, getCertifiedByRunner, certifiedUrl } = useRunnersContext();
+  const { logoSrc, getCertifiedByRunner, certifiedUrl, runnerFormatted } =
+    useRunnersContext();
+  const regex = /\d/;
 
   const handleOpenCertified = useCallback(() => {
     window.open(certifiedUrl, "_blank");
@@ -32,41 +34,46 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
     // Liberar a URL do objeto após o download
     window.URL.revokeObjectURL(certifiedUrl);
   }, [certifiedUrl]);
-
   return (
     <ModalOverlay>
       <Container>
         <HeaderContainer>
           <LogoImage src={logoSrc} alt={assets.images.logo.alt} />
           <RunnerDescContainer>
-            <h3>{runner.nome}</h3>
+            <h3>{runnerFormatted.nome}</h3>
             <h4>
-              {runnerTransition.sex[runner?.sexo.toLowerCase()]} |{" "}
-              {runner.numero}
+              {
+                runnerTransition.sex[
+                  runnerFormatted.sexo.split(regex)[0].toLowerCase()
+                ]
+              }{" "}
+              | {runner.numeroCorredor}
             </h4>
           </RunnerDescContainer>
         </HeaderContainer>
         <ClassificationContainer>
-          <h2>Classifacações</h2>
+          <h2>Classificações</h2>
           <ClassificationCardContainer>
             <IndividualClassificationCard
               category='Sexo'
-              classification={Number(runner.classSexo)}
+              classification={Number(runnerFormatted.classSexo) || 0}
               isPersonalBest={false}
               backgroundColor='#F1E1F7'
               paragraphColor='#BB6BD9'
             />
             <IndividualClassificationCard
               category='Geral'
-              classification={Number(runner.classGeral)}
+              classification={Number(runnerFormatted.classGeral) || 0}
               isPersonalBest={false}
               backgroundColor='#CDFBF8'
               paragraphColor='#5ABEBD'
             />
             <IndividualClassificationCard
               category='CatFE'
-              classification={Number(runner.classCatFE)}
-              isPersonalBest={Number(runner.classCatFE) > 0 ? true : false}
+              classification={Number(runnerFormatted.classCatFE) || 0}
+              isPersonalBest={
+                Number(runnerFormatted.classCatFE) > 0 ? true : false
+              }
               backgroundColor='#FFEDD8'
               paragraphColor='#D9A06B'
             />
@@ -74,7 +81,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
         </ClassificationContainer>
         <ClassificationTimesContainer>
           <IndividualTimeCard
-            time={runner.tempoLiquido}
+            time={runnerFormatted.tempoLiquido || "0"}
             label='Tempo Líquido'
             icon={
               <LogoImage
@@ -90,7 +97,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runner.tempoBruto}
+            time={runnerFormatted.tempoBruto || "0"}
             label='Tempo Bruto'
             icon={
               <LogoImage
@@ -106,7 +113,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runner.paceMedio}
+            time={runnerFormatted.paceMedio || "0"}
             label='Pace Medio'
             icon={
               <LogoImage
@@ -122,7 +129,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runner.equipe}
+            time={runnerFormatted.equipe}
             label='Equipe'
             icon={
               <LogoImage
@@ -143,7 +150,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             <Button
               text='Baixar certificado'
               handleClick={() => {
-                getCertifiedByRunner(Number(runner.numero));
+                getCertifiedByRunner(Number(runner.numeroCorredor));
                 handleOpenCertified();
               }}
             />

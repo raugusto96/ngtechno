@@ -1,14 +1,9 @@
 import { RunnersContext } from "../runnerContext";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import NgtechnoApi from "../../utils/api/ngtechnoApi";
-import {
-  IFilter,
-  IModal,
-  IPublicFilter,
-  IRunner,
-  IRunnerList,
-} from "./protocols";
+import { IFilter, IModal, IPublicFilter, IRunnerList, Run } from "./protocols";
 import axios from "axios";
+import { toCamelCase } from "utils/formatters/text/toCamelCase";
 
 const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -17,11 +12,13 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const [filter, setFilter] = useState<IFilter>({
     name: "",
   });
-  const [runner, setRunner] = useState<IRunner>({} as IRunner);
+  const [runner, setRunner] = useState<any>({});
+  const [runnerFormatted, setRunnerFormatted] = useState<any>({});
   const [runId, setRunId] = useState<string>("");
   const [logoSrc, setLogoSrc] = useState<string>("");
   const [runGuid, setRunGuid] = useState<string>("");
   const [certifiedUrl, setCertifiedUrl] = useState<string>("");
+  const [listColumns, setListColumns] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [categoriesOptions, setCategoriesOptions] = useState<string[]>([]);
   const [sexesOptions, setSexesOptions] = useState<string[]>([]);
@@ -66,6 +63,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     });
     setRunGuid(response?.retorno?.guidCorrida);
     setIsListButtonVisible(response?.retorno.suportaFiltroPublico);
+    setListColumns(response?.retorno.colunasCorrida);
   }, [ngtechnoApi, runId]);
 
   const getListPossibleValues = useCallback(async () => {
@@ -132,23 +130,22 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       });
       if (!response?.sucesso) throw new Error(response?.mensagem);
-      const formatedRunner = {
-        nome: response?.retorno.valoresCorrida[0],
-        numero: response?.retorno.numeroCorredor,
-        sexo: response?.retorno.valoresCorrida[1],
-        tempoBruto: response?.retorno.valoresCorrida[2],
-        tempoLiquido: response?.retorno.valoresCorrida[3],
-        paceMedio: response?.retorno.valoresCorrida[4],
-        classSexo: response?.retorno.valoresCorrida[5],
-        classGeral: response?.retorno.valoresCorrida[6],
-        classCatFE: response?.retorno.valoresCorrida[7],
-        equipe: response?.retorno.valoresCorrida[8],
-        modal: response?.retorno.valoresCorrida[9],
-        dist: response?.retorno.valoresCorrida[10],
-        certificado: response?.retorno.suportaCertificado,
-      };
-      setRunner(formatedRunner);
+
+      setRunner(response?.retorno);
       handleOpenModal("classificationModal", true);
+
+      const runnerEntries: [string, string[]][] = Object.entries(
+        response?.retorno
+      );
+      const [, , [, keys], [, values]] = runnerEntries;
+      const formattedRunner: Run = keys.reduce((runnerValues, curr, index) => {
+        const value = values[index];
+        if (value) {
+          runnerValues[toCamelCase(curr)] = value;
+        }
+        return runnerValues;
+      }, {} as Run);
+      setRunnerFormatted(formattedRunner);
     } catch (error: any) {
       console.log(error);
       setErrorMessage(error.message);
@@ -223,6 +220,8 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     getRunner,
     logoSrc,
     setRunId,
+    listColumns,
+    runnerFormatted,
     sexesOptions,
     getRunnersList,
     setCategoriesOptions,

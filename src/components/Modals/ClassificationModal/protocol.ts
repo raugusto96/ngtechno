@@ -1,6 +1,4 @@
-import { IRunner } from "context/provider/protocols";
-
 export interface ClassificationModalProps {
-  runner: IRunner;
+  runner: any;
   handleClose: (type: string, value: boolean) => void;
 }

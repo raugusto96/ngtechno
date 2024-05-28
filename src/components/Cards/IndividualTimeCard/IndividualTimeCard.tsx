@@ -8,7 +8,7 @@ const IndividualTimeCard: React.FC<IndividualTimeCardProps> = ({
 }) => {
   return (
     <Container>
-      <TimeTitle>{time ? time : "--:--:--"}</TimeTitle>
+      <TimeTitle>{time ? time : "-"}</TimeTitle>
       <TimeSubTitle>{label}</TimeSubTitle>
       <SvgContainer>{icon}</SvgContainer>
     </Container>
