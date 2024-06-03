@@ -48,31 +48,39 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
                 ]
               }{" "}
               | {runner.numeroCorredor}
+              {runnerFormatted.faixaEtaria
+                ? ` | ${runnerFormatted.faixaEtaria}`
+                : " | "}
             </h4>
           </RunnerDescContainer>
         </HeaderContainer>
         <ClassificationContainer>
-          <h2>Classificações</h2>
+          <h2>
+            Classificações |{" "}
+            {runnerFormatted.percurso ? runnerFormatted.percurso : ""}
+          </h2>
           <ClassificationCardContainer>
-            <IndividualClassificationCard
-              category='Sexo'
-              classification={Number(runnerFormatted.classSexo) || 0}
-              isPersonalBest={false}
-              backgroundColor='#F1E1F7'
-              paragraphColor='#BB6BD9'
-            />
+            {runnerFormatted.classSexo && (
+              <IndividualClassificationCard
+                category='Sexo'
+                classification={Number(runnerFormatted.classSexo) || 0}
+                isPersonalBest={false}
+                backgroundColor='#F1E1F7'
+                paragraphColor='#BB6BD9'
+              />
+            )}
             <IndividualClassificationCard
               category='Geral'
-              classification={Number(runnerFormatted.classGeral) || 0}
+              classification={Number(runnerFormatted.classificacao) || 0}
               isPersonalBest={false}
               backgroundColor='#CDFBF8'
               paragraphColor='#5ABEBD'
             />
             <IndividualClassificationCard
               category='CatFE'
-              classification={Number(runnerFormatted.classCatFE) || 0}
+              classification={Number(runnerFormatted.classFaixaEtaria) || 0}
               isPersonalBest={
-                Number(runnerFormatted.classCatFE) > 0 ? true : false
+                Number(runnerFormatted.classFaixaEtaria) > 0 ? true : false
               }
               backgroundColor='#FFEDD8'
               paragraphColor='#D9A06B'
@@ -97,7 +105,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runnerFormatted.tempoBruto || "0"}
+            time={runnerFormatted.tempoChegada || "0"}
             label='Tempo Bruto'
             icon={
               <LogoImage
@@ -113,7 +121,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             }
           />
           <IndividualTimeCard
-            time={runnerFormatted.paceMedio || "0"}
+            time={runnerFormatted.pace || "0"}
             label='Pace Medio'
             icon={
               <LogoImage
@@ -128,8 +136,9 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
               />
             }
           />
+
           <IndividualTimeCard
-            time={runnerFormatted.equipe}
+            time={runnerFormatted.equipe ? runnerFormatted.equipe : "-"}
             label='Equipe'
             icon={
               <LogoImage

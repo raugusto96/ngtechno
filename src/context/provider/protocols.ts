@@ -1,17 +1,16 @@
 export interface IRunner {
-  nome: string;
   numero: string;
+  nome: string;
+  classificacao: string;
   sexo: string;
-  tempoBruto: string;
+  tempoChegada: string;
   tempoLiquido: string;
-  paceMedio: string;
-  classSexo: string;
-  classGeral: string;
-  classCatFE: string;
-  equipe: string;
-  modal: string;
-  dist: string;
-  certificado: boolean;
+  faixaEtaria: string;
+  classFaixaEtaria: string;
+  pace: string;
+  percurso: string;
+  equipe?: string;
+  classSexo?: string;
 }
 
 export interface IRunnerList {

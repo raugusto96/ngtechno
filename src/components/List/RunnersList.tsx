@@ -9,14 +9,14 @@ import {
   TableHeaderContainer,
   TableRowContainer,
 } from "./styles";
-import { tableHeaders } from "./mockData";
 import assets from "../../config/assets";
 import LogoImage from "../../components/Images/Logo/LogoImage";
+import { separateCamelCase } from "./../../utils/formatters/text/separateCamelCase";
 
 const RunnersList: React.FC = () => {
   const [runners, setRunners] = useState<IRunnerList[]>([]);
 
-  const { filteredRunnersList } = useRunnersContext();
+  const { filteredRunnersList, listColumns } = useRunnersContext();
 
   useEffect(() => {
     setRunners(filteredRunnersList);
@@ -26,8 +26,8 @@ const RunnersList: React.FC = () => {
     <TableContainer>
       <TableHeaderContainer>
         <TableRowContainer>
-          {tableHeaders.map((row: string) => (
-            <TableHeader text={row} key={row} />
+          {listColumns.map((column: string) => (
+            <TableHeader text={separateCamelCase(column)} key={column} />
           ))}
         </TableRowContainer>
       </TableHeaderContainer>
@@ -36,9 +36,9 @@ const RunnersList: React.FC = () => {
           <TableRowContainer key={runner.numeroCorredor}>
             <TableData
               data={
-                Number(runner.valoresCorrida[5]) > 5 ? (
-                  Number(runner.valoresCorrida[5])
-                ) : Number(runner.valoresCorrida[5]) === 1 ? (
+                Number(runner.numeroCorredor) > 5 ? (
+                  Number(runner.numeroCorredor)
+                ) : Number(runner.numeroCorredor) === 1 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -49,7 +49,7 @@ const RunnersList: React.FC = () => {
                         .first.icon.alt
                     }
                   />
-                ) : Number(runner.valoresCorrida[5]) === 2 ? (
+                ) : Number(runner.numeroCorredor) === 2 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -60,7 +60,7 @@ const RunnersList: React.FC = () => {
                         .second.icon.alt
                     }
                   />
-                ) : Number(runner.valoresCorrida[5]) === 3 ? (
+                ) : Number(runner.numeroCorredor) === 3 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions
@@ -71,7 +71,7 @@ const RunnersList: React.FC = () => {
                         .third.icon.alt
                     }
                   />
-                ) : Number(runner.valoresCorrida[5]) === 4 ? (
+                ) : Number(runner.numeroCorredor) === 4 ? (
                   <LogoImage
                     src={
                       assets.svgs.medals.individual.classification.positions

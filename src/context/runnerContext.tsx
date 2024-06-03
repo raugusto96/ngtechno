@@ -6,7 +6,7 @@ type RunnerContextType = {
   setFilter: (value: IFilter) => void;
   setRunId: (runId: string) => void;
   getRunner: (numeroCorredor: number) => void;
-  runnerFormatted: any;
+  runnerFormatted: IRunner;
   logoSrc: string;
   isListButtonVisible: boolean;
   listColumns: string[];

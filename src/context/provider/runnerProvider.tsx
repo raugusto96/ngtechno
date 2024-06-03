@@ -1,7 +1,14 @@
 import { RunnersContext } from "../runnerContext";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import NgtechnoApi from "../../utils/api/ngtechnoApi";
-import { IFilter, IModal, IPublicFilter, IRunnerList, Run } from "./protocols";
+import {
+  IFilter,
+  IModal,
+  IPublicFilter,
+  IRunner,
+  IRunnerList,
+  Run,
+} from "./protocols";
 import axios from "axios";
 import { toCamelCase } from "utils/formatters/text/toCamelCase";
 
@@ -13,7 +20,9 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     name: "",
   });
   const [runner, setRunner] = useState<any>({});
-  const [runnerFormatted, setRunnerFormatted] = useState<any>({});
+  const [runnerFormatted, setRunnerFormatted] = useState<IRunner>(
+    {} as IRunner
+  );
   const [runId, setRunId] = useState<string>("");
   const [logoSrc, setLogoSrc] = useState<string>("");
   const [runGuid, setRunGuid] = useState<string>("");
@@ -63,7 +72,7 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     });
     setRunGuid(response?.retorno?.guidCorrida);
     setIsListButtonVisible(response?.retorno.suportaFiltroPublico);
-    setListColumns(response?.retorno.colunasCorrida);
+    setListColumns(["Numero", ...(response?.retorno.colunasCorrida ?? [])]);
   }, [ngtechnoApi, runId]);
 
   const getListPossibleValues = useCallback(async () => {
@@ -116,6 +125,39 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
     [runId]
   );
 
+  const initializeIRunner = (): IRunner => ({
+    numero: "",
+    nome: "",
+    classificacao: "",
+    sexo: "",
+    tempoChegada: "",
+    tempoLiquido: "",
+    faixaEtaria: "",
+    classFaixaEtaria: "",
+    pace: "",
+    percurso: "",
+    classSexo: "",
+  });
+
+  const runnerKeyMap: { [key: string]: keyof IRunner } = {
+    numero: "numero",
+    nome: "nome",
+    classificacao: "classificacao",
+    sexo: "sexo",
+    tempoChegada: "tempoChegada",
+    tempoLiquido: "tempoLiquido",
+    faixaEtaria: "faixaEtaria",
+    classFaixaEtaria: "classFaixaEtaria",
+    pace: "pace",
+    percurso: "percurso",
+    classSexo: "classSexo",
+  };
+
+  const mapToIRunnerKey = (key: string): keyof IRunner | undefined => {
+    const camelCaseKey = toCamelCase(key);
+    return runnerKeyMap[camelCaseKey];
+  };
+
   // Requisita o corredor
   const getRunner = async (numeroCorredor: number) => {
     try {
@@ -137,15 +179,20 @@ const RunnerProvider: React.FC<{ children: React.ReactNode }> = ({
       const runnerEntries: [string, string[]][] = Object.entries(
         response?.retorno
       );
+      const formattedRunner: Run = initializeIRunner() as unknown as Run;
       const [, , [, keys], [, values]] = runnerEntries;
-      const formattedRunner: Run = keys.reduce((runnerValues, curr, index) => {
+
+      keys.forEach((key, index) => {
         const value = values[index];
         if (value) {
-          runnerValues[toCamelCase(curr)] = value;
+          const camelCaseKey = toCamelCase(key);
+          const mappedKey = mapToIRunnerKey(key) || camelCaseKey;
+          formattedRunner[mappedKey] = value;
         }
-        return runnerValues;
-      }, {} as Run);
-      setRunnerFormatted(formattedRunner);
+      });
+
+      console.log(formattedRunner);
+      setRunnerFormatted(formattedRunner as unknown as IRunner);
     } catch (error: any) {
       console.log(error);
       setErrorMessage(error.message);
