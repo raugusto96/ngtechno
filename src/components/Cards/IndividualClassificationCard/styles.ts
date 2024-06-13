@@ -23,7 +23,7 @@ export const Container = styled.div<IndividualClassificationCardStyledProps>`
     position: absolute;
     width: 37.94px;
     height: 37.94px;
-    right: -10px;
+    right: -20px;
     top: 0px;
 
     transform: rotate(-11.07deg);

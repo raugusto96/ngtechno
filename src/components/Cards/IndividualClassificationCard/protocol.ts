@@ -1,5 +1,5 @@
 export interface IndividualClassificationCardProps {
-  classification: number;
+  classification: string;
   category: string;
   categoryRange?: string;
   isPersonalBest: boolean;

@@ -60,7 +60,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             {runnerFormatted.classSexo && (
               <IndividualClassificationCard
                 category='Sexo'
-                classification={Number(runnerFormatted.classSexo) || 0}
+                classification={runnerFormatted.classSexo || "0"}
                 isPersonalBest={false}
                 backgroundColor='#F1E1F7'
                 paragraphColor='#BB6BD9'
@@ -68,7 +68,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             )}
             <IndividualClassificationCard
               category='Geral'
-              classification={Number(runnerFormatted.classificacao) || 0}
+              classification={runnerFormatted.classificacao || "0"}
               isPersonalBest={false}
               backgroundColor='#CDFBF8'
               paragraphColor='#5ABEBD'
@@ -76,7 +76,7 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
             <IndividualClassificationCard
               category='Faixa Etária'
               categoryRange={runnerFormatted.faixaEtaria}
-              classification={Number(runnerFormatted.classFaixaEtaria) || 0}
+              classification={runnerFormatted.classFaixaEtaria || "0"}
               isPersonalBest={
                 Number(runnerFormatted.classFaixaEtaria) > 0 ? true : false
               }
