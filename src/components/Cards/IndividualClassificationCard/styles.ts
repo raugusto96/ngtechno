@@ -14,17 +14,17 @@ export const Container = styled.div<IndividualClassificationCardStyledProps>`
   gap: 4px;
 
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 100px;
 
-  border-radius: 50%;
+  border-radius: 1rem;
 
   & img {
     position: absolute;
     width: 37.94px;
     height: 37.94px;
     right: -10px;
-    top: 4.28px;
+    top: 0px;
 
     transform: rotate(-11.07deg);
   }

@@ -39,22 +39,19 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
       <Container>
         <HeaderContainer>
           <LogoImage src={logoSrc} alt={assets.images.logo.alt} />
+        </HeaderContainer>
+        <ClassificationContainer>
           <RunnerDescContainer>
             <h3>{runnerFormatted.nome}</h3>
             <h4>
+              N°: {runner.numeroCorredor} |{" "}
               {
                 runnerTransition.sex[
                   runnerFormatted.sexo.split(regex)[0].toLowerCase()
                 ]
-              }{" "}
-              | {runner.numeroCorredor}
-              {runnerFormatted.faixaEtaria
-                ? ` | ${runnerFormatted.faixaEtaria}`
-                : " | "}
+              }
             </h4>
           </RunnerDescContainer>
-        </HeaderContainer>
-        <ClassificationContainer>
           <h2>
             Classificações |{" "}
             {runnerFormatted.percurso ? runnerFormatted.percurso : ""}
@@ -77,7 +74,8 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
               paragraphColor='#5ABEBD'
             />
             <IndividualClassificationCard
-              category='CatFE'
+              category='Faixa Etária'
+              categoryRange={runnerFormatted.faixaEtaria}
               classification={Number(runnerFormatted.classFaixaEtaria) || 0}
               isPersonalBest={
                 Number(runnerFormatted.classFaixaEtaria) > 0 ? true : false

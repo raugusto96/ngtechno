@@ -29,25 +29,24 @@ export const Container = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  padding: 2rem;
+  /* padding: 2rem; */
   display: flex;
   border-radius: 1rem;
   background-color: white;
-  gap: 1rem;
-  & div {
-    max-width: 50%;
-  }
+
   & img {
-    width: 50%;
-    border-radius: 1rem;
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
   }
 `;
 
 export const RunnerDescContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
 
   & h3 {
     color: ${styles.colors.blue["primary-1"]};

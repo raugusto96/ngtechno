@@ -13,6 +13,7 @@ const IndividualClassificationCard: React.FC<
 > = ({
   classification,
   category,
+  categoryRange,
   isPersonalBest,
   backgroundColor,
   paragraphColor,
@@ -29,6 +30,9 @@ const IndividualClassificationCard: React.FC<
         <ClassTitle>{classification ? classification : 0}</ClassTitle>
         <ClassSubTitle paragraphColor={paragraphColor}>
           {category}
+        </ClassSubTitle>
+        <ClassSubTitle paragraphColor={paragraphColor}>
+          {categoryRange}
         </ClassSubTitle>
       </IndividualClassificationContainer>
     </Container>
