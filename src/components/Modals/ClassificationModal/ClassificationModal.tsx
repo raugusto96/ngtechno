@@ -73,16 +73,18 @@ const ClassificationModal: React.FC<ClassificationModalProps> = ({
               backgroundColor='#CDFBF8'
               paragraphColor='#5ABEBD'
             />
-            <IndividualClassificationCard
-              category='Faixa Etária'
-              categoryRange={runnerFormatted.faixaEtaria}
-              classification={runnerFormatted.classFaixaEtaria || "0"}
-              isPersonalBest={
-                Number(runnerFormatted.classFaixaEtaria) > 0 ? true : false
-              }
-              backgroundColor='#FFEDD8'
-              paragraphColor='#D9A06B'
-            />
+            {runnerFormatted.faixaEtaria && (
+              <IndividualClassificationCard
+                category='Faixa Etária'
+                categoryRange={runnerFormatted.faixaEtaria}
+                classification={runnerFormatted.classFaixaEtaria || "0"}
+                isPersonalBest={
+                  Number(runnerFormatted.classFaixaEtaria) > 0 ? true : false
+                }
+                backgroundColor='#FFEDD8'
+                paragraphColor='#D9A06B'
+              />
+            )}
           </ClassificationCardContainer>
         </ClassificationContainer>
         <ClassificationTimesContainer>
