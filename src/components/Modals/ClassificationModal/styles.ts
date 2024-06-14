@@ -49,6 +49,7 @@ export const RunnerDescContainer = styled.div`
   align-items: center;
 
   & h3 {
+    text-align: center;
     color: ${styles.colors.blue["primary-1"]};
     font-size: ${styles.fonts.size.large};
     font-weight: ${styles.fonts.weight.semibold};
